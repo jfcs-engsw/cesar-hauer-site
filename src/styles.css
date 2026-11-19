@@ -1536,3 +1536,647 @@ a {
   margin-top: 0;
   font-size: 1.75rem;
 }
+
+/* Rodapé: acesso discreto à área de gestão */
+.footer__restrito {
+  color: #6f8a87;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.footer__restrito:hover {
+  color: #dbe7e5;
+  text-decoration: underline;
+}
+
+/* Área de gestão da parceria CHD + FESB (prefixo g-) */
+.g {
+  min-height: 100vh;
+  background: var(--muted);
+}
+
+.g-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.g-bar {
+  background: var(--ink);
+  color: #fff;
+}
+
+.g-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.g-bar__kicker {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.g-bar__title {
+  font: 600 1.25rem var(--serif);
+}
+
+.g-bar__acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.g-bar__user {
+  font-size: 0.875rem;
+  color: #9fb6b3;
+  margin-right: 4px;
+}
+
+.g-notice {
+  background: var(--gold-soft);
+  color: var(--ink);
+  font-size: 0.8125rem;
+  padding: 6px 0;
+}
+
+.g-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.g-tabs__inner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+.g-tab {
+  flex: none;
+  padding: 14px 12px;
+  border-bottom: 3px solid transparent;
+  color: var(--text-2);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.g-tab:hover {
+  color: var(--petrol-800);
+}
+
+.g-tab.active {
+  color: var(--petrol-800);
+  border-bottom-color: var(--gold);
+}
+
+.g-month {
+  flex: none;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-2);
+  padding: 8px 0 8px 12px;
+}
+
+.g-month select {
+  font: 600 0.9375rem var(--sans);
+  padding: 7px 10px;
+  border: 1px solid #b9c2c0;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--petrol-800);
+}
+
+.g-main {
+  padding-top: 28px;
+  padding-bottom: 64px;
+  display: grid;
+  gap: 24px;
+}
+
+.g-head h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+
+.g-head .hint {
+  margin: 4px 0 0;
+}
+
+.g-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.g-card--muted {
+  background: transparent;
+  border-style: dashed;
+}
+
+/* Indicadores */
+.g-kpis {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.g-kpi,
+.g-marco {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--petrol-600);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.g-kpi--fesb {
+  border-top-color: var(--gold);
+}
+
+.g-kpi--chd {
+  border-top-color: var(--petrol-800);
+}
+
+.g-kpi__label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.g-kpi__value {
+  margin: 4px 0;
+  font: 600 1.5rem/1.2 var(--serif);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.g-kpi__sub {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+
+/* Tabelas */
+.g-table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.g-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.g-table caption {
+  text-align: left;
+  padding: 12px 14px;
+  font: 600 1rem var(--serif);
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+
+.g-table th,
+.g-table td {
+  padding: 9px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #eceeec;
+}
+
+.g-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  background: var(--petrol-100);
+  white-space: nowrap;
+}
+
+.g-table .g-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.g-table .g-idx {
+  color: var(--text-2);
+  width: 1%;
+}
+
+.g-table tfoot td {
+  font-weight: 700;
+  background: var(--muted);
+  border-bottom: 0;
+  border-top: 1px solid var(--border);
+}
+
+.g-sub {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+
+.g-code {
+  font-size: 0.75rem;
+  color: var(--petrol-700);
+  word-break: break-all;
+}
+
+/* Situação */
+.g-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.g-badge--ok {
+  background: #e1f0e6;
+  color: #1d5e36;
+}
+
+.g-badge--warn {
+  background: #f6ecd6;
+  color: var(--gold-text);
+}
+
+.g-badge--bad {
+  background: #f6e0dc;
+  color: #8a2c1d;
+}
+
+.g-badge--neutral {
+  background: var(--petrol-100);
+  color: var(--petrol-800);
+}
+
+/* Gráficos SVG: previsto em dourado tracejado, realizado em petróleo cheio */
+.g-chart {
+  margin: 0;
+}
+
+.g-chart svg,
+.g-funnel {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.g-grid {
+  stroke: #e3e6e3;
+  stroke-width: 1;
+}
+
+.g-axis {
+  font: 500 11px var(--sans);
+  fill: var(--text-2);
+}
+
+.g-axis--strong {
+  font-weight: 700;
+  fill: var(--gold-text);
+}
+
+.g-line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.g-line--prev {
+  stroke: var(--gold);
+  stroke-dasharray: 7 5;
+}
+
+.g-line--real {
+  stroke: var(--petrol-700);
+  stroke-width: 3;
+}
+
+.g-line--tol {
+  stroke: #b9c2c0;
+  stroke-width: 1.5;
+  stroke-dasharray: 2 4;
+}
+
+.g-dot--real {
+  fill: var(--petrol-700);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.g-dot--prev {
+  fill: #fff;
+  stroke: var(--gold);
+  stroke-width: 2;
+}
+
+.g-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 8px;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+
+.g-legend__item::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border-top: 3px solid var(--petrol-700);
+}
+
+.g-legend__item--prev::before {
+  border-top: 3px dashed var(--gold);
+}
+
+.g-legend__item--tol::before {
+  border-top: 2px dotted #b9c2c0;
+}
+
+.g-fstage {
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.g-fstage--0 {
+  fill: var(--ink);
+}
+
+.g-fstage--1 {
+  fill: var(--petrol-800);
+}
+
+.g-fstage--2 {
+  fill: var(--petrol-700);
+}
+
+.g-fstage--3 {
+  fill: var(--petrol-600);
+}
+
+.g-fstage--4 {
+  fill: #2f817c;
+}
+
+.g-fstage--post {
+  fill: var(--gold-soft);
+  stroke: var(--gold);
+}
+
+.g-flabel {
+  font: 700 13px var(--sans);
+  fill: #fff;
+}
+
+.g-flabel--dark {
+  fill: var(--ink);
+}
+
+.g-fname {
+  font: 600 14px var(--serif);
+  fill: var(--ink);
+}
+
+/* Degraus de custo */
+.g-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.g-steps li {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+
+.g-steps strong {
+  color: var(--ink);
+}
+
+.g-steps small {
+  font-size: 0.75rem;
+}
+
+.g-steps li.is-past {
+  border-color: var(--petrol-100);
+  background: var(--petrol-100);
+}
+
+.g-steps li.is-on {
+  border: 2px solid var(--gold);
+  box-shadow: var(--shadow);
+}
+
+/* Marcos */
+.g-marcos {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.g-marco {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  justify-items: start;
+}
+
+.g-marco .progress__bar {
+  width: 100%;
+}
+
+/* Prestação de contas */
+.g-doc {
+  display: grid;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.g-doc__acts {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.g-doc__head h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.g-doc__sec {
+  margin: 8px 0 0;
+  font-size: 1.125rem;
+  color: var(--petrol-800);
+}
+
+.g-dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 0.875rem;
+}
+
+.g-dl dt,
+.g-dl dd {
+  margin: 0;
+  padding: 8px 14px;
+  border-bottom: 1px solid #eceeec;
+}
+
+.g-dl dd {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.g-dl__strong {
+  font-weight: 700;
+  background: var(--muted);
+}
+
+.g-sign {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 40px;
+}
+
+.g-sign div {
+  border-top: 1px solid var(--text);
+  padding-top: 6px;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+/* Entrada simulada */
+.g-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(120% 140% at 85% 0%, var(--petrol-700) 0%, var(--petrol-800) 45%, var(--ink) 100%);
+}
+
+.g-login__card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.g-login__card h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .g-doc {
+    padding: 16px;
+  }
+
+  .g-kpi__value {
+    font-size: 1.25rem;
+  }
+
+  .g-sign {
+    gap: 24px;
+  }
+}
+
+/* Impressão: só o demonstrativo, sem barra, abas nem botões */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  .g {
+    background: #fff;
+    min-height: 0;
+  }
+
+  .g-noprint {
+    display: none !important;
+  }
+
+  .g-main {
+    padding: 0;
+  }
+
+  .g-doc {
+    border: 0;
+    padding: 0;
+  }
+
+  .g-table-wrap {
+    overflow: visible;
+    break-inside: avoid;
+  }
+
+  .g-table {
+    font-size: 9.5pt;
+  }
+
+  .g-table th,
+  .g-table tfoot td,
+  .g-dl__strong {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .g-dl,
+  .g-sign {
+    break-inside: avoid;
+  }
+}
