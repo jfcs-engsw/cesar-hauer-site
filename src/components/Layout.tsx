@@ -100,7 +100,12 @@ function Footer() {
           passada não é garantia de rentabilidade futura. Consultoria de valores mobiliários prestada nos termos da
           Resolução CVM 19/2021.
         </p>
-        <p>© {new Date().getFullYear()} Cesar Hauer. Todos os direitos reservados.</p>
+        <p>
+          © {new Date().getFullYear()} Cesar Hauer. Todos os direitos reservados.{' '}
+          <Link to="/gestao" className="footer__restrito">
+            Gestão
+          </Link>
+        </p>
       </div>
     </footer>
   );
