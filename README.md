@@ -24,3 +24,11 @@ Gateway de pagamento, servidor de pedidos e agenda, reunião criada pelo Microso
 npm install
 npm run dev
 ```
+
+## Publicação na VPS FESB
+
+Container `cesar-hauer-site` (nginx, só em `127.0.0.1:8081`) atrás do Caddy `proxy-fesb` (stack em `~/proxy-fesb` na VPS, HTTPS automático). Endereço provisório por DNS curinga: `cesarhauer.76-13-230-98.sslip.io`. Para publicar ou atualizar, na VPS:
+
+```
+bash ~/cesar-hauer-site/deploy/vps-deploy.sh
+```

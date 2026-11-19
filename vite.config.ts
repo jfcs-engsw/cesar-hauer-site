@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Publicado em https://jfcs-engsw.github.io/cesar-hauer-site/ (protótipo).
+// Base relativa: o mesmo build serve no GitHub Pages e na VPS FESB (rotas por hash).
 export default defineConfig({
   plugins: [react()],
-  base: '/cesar-hauer-site/',
+  base: './',
 });
