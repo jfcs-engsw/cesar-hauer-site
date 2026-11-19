@@ -365,7 +365,7 @@ function Receitas({ m }: { m: Mes }) {
   const foraTotal = m.fora.reduce((a, f) => a + f.valor, 0);
   return (
     <>
-      <H title={`Receitas por linha · ${m.rotulo}`}>Linhas digitais (50/50 sobre o resultado) e livro rastreado (FESB com 20% do que o CHD recebe).</H>
+      <H title={`Receitas por linha · ${m.rotulo}`}>Linhas digitais (50/50 sobre o resultado) e livro rastreado (FESB com 10% do que o CHD recebe).</H>
       <Tabela
         titulo="Receitas da parceria no mês"
         cols={[{ h: 'Linha' }, { h: 'Volume' }, { h: 'Bruto', num: true }, { h: 'Deduções', num: true }, { h: 'Líquido', num: true }, { h: 'Bruto acumulado', num: true }]}

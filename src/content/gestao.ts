@@ -10,7 +10,7 @@
 // - Os aportes de implantação são devolvidos às Partes, 50/50, com 40% da margem do mês (líquido menos
 //   custos), na ordem de prioridade da fila.
 // - Impostos simulados em 6% do bruto; gateway em 4,99% + R$ 0,49 por transação.
-// - Livro: o CHD recebe R$ 9,90 por exemplar atribuído ao funil; a FESB fica com 20% desse valor.
+// - Livro: o CHD recebe R$ 9,90 por exemplar atribuído ao funil; a FESB fica com 10% desse valor (decisão de 19/11/2026).
 // - A meta de R$ 180 mil conta só as linhas digitais (curso, bumps, SaaS, YouTube); o livro fica fora.
 
 export type LinhaId = 'curso' | 'bumps' | 'saas' | 'youtube';
@@ -23,7 +23,7 @@ export const LINHAS: { id: LinhaId; nome: string; nota: string }[] = [
 ];
 
 export const DIVISAO_DIGITAL = 0.5;
-export const PARTICIPACAO_LIVRO = 0.2;
+export const PARTICIPACAO_LIVRO = 0.1;
 export const QUITACAO_PCT = 0.4;
 const IMPOSTO = 0.06;
 const GATEWAY_PCT = 0.0499;
@@ -74,7 +74,7 @@ export const DEGRAUS = [
 type ItemCusto = { item: string; tipo: 'Fixo' | 'Variável'; desde: number; teto: (rlAnterior: number, degrau: number) => number };
 
 const ITENS_CUSTO: ItemCusto[] = [
-  { item: 'VPS (rateio)', tipo: 'Fixo', desde: 0, teto: () => 25 },
+  { item: 'VPS da FESB (rateio de 25%)', tipo: 'Fixo', desde: 0, teto: () => 25 },
   { item: 'Domínio (rateio anual)', tipo: 'Fixo', desde: 0, teto: () => 5 },
   { item: 'Ferramentas gratuitas (formulários, analytics)', tipo: 'Fixo', desde: 0, teto: () => 0 },
   { item: 'Vídeo por uso', tipo: 'Variável', desde: 0, teto: () => 30 },
