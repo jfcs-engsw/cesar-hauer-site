@@ -1,0 +1,8 @@
+services:
+  site:
+    build: .
+    container_name: cesar-hauer-site
+    restart: unless-stopped
+    # Só na interface local: o acesso externo passa pelo Caddy (proxy-fesb), com HTTPS.
+    ports:
+      - "127.0.0.1:8081:80"
