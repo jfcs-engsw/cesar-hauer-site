@@ -365,6 +365,14 @@ a {
   place-items: center;
 }
 
+.portrait__photo {
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold);
+}
+
 .portrait__frame span {
   font: 600 5rem var(--serif);
   color: var(--gold);

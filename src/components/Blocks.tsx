@@ -146,12 +146,12 @@ export function ContactBand({ title, text, to, label }: { title: string; text: s
   );
 }
 
-// Retrato provisório: monograma até chegarem as fotos autorizadas pelo Cesar.
+// Foto provisória (perfil público do Instagram, 150 px) até chegar a foto oficial do CHD.
 export function Portrait({ caption }: { caption?: string }) {
   return (
     <figure className="portrait">
-      <div className="portrait__frame" aria-hidden="true">
-        <span>CH</span>
+      <div className="portrait__frame">
+        <img className="portrait__photo" src={`${import.meta.env.BASE_URL}fotos/chd-provisoria.png`} alt="Cesar Hauer Doetzer" />
       </div>
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
