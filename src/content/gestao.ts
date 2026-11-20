@@ -7,9 +7,10 @@
 // - Custos divididos 50/50: os operacionais saem da receita do mês antes da divisão (equivale a 50/50);
 //   quando a receita do mês não cobre, cada Parte aporta metade da diferença.
 // - Pré-lançamento (nov/2026): implantação e custos do Degrau 0 aportados 50/50 pelas Partes.
-// - Os aportes de implantação são devolvidos às Partes, 50/50, com 40% da margem do mês (líquido menos
-//   custos), na ordem de prioridade da fila.
-// - Impostos simulados em 6% do bruto; gateway em 4,99% + R$ 0,49 por transação.
+// - Os aportes de implantação são devolvidos às Partes, 50/50, com 100% da margem do mês (líquido menos
+//   custos), antes da divisão e na ordem de prioridade da fila (minuta, cláusulas 7.2 e 7.3; docs/18).
+// - Taxas e custos do docs/18 v0.1 (20/11/2026): Asaas com PIX a R$ 1,99 por cobrança e cartão a 3,99% + R$ 0,49
+//   (metade das vendas em cada, bump na mesma cobrança), imposto de 8,2% (E) e reembolsos perto de 2% (E).
 // - Livro: o CHD recebe R$ 9,90 por exemplar atribuído ao funil; a FESB fica com 10% desse valor (decisão de 19/11/2026).
 // - A meta de R$ 180 mil conta só as linhas digitais (curso, bumps, SaaS, YouTube); o livro fica fora.
 
@@ -24,10 +25,12 @@ export const LINHAS: { id: LinhaId; nome: string; nota: string }[] = [
 
 export const DIVISAO_DIGITAL = 0.5;
 export const PARTICIPACAO_LIVRO = 0.1;
-export const QUITACAO_PCT = 0.4;
-const IMPOSTO = 0.06;
-const GATEWAY_PCT = 0.0499;
-const GATEWAY_FIXO = 0.49;
+export const QUITACAO_PCT = 1;
+const IMPOSTO = 0.082;
+const PIX_FIXO = 1.99;
+const CARTAO_PCT = 0.0399;
+const CARTAO_FIXO = 0.49;
+const PARTE_PIX = 0.5;
 const LIVRO_POR_EXEMPLAR = 9.9;
 const TICKET_CURSO = 497;
 const TICKET_BUMP = 47;
@@ -73,12 +76,14 @@ export const DEGRAUS = [
 
 type ItemCusto = { item: string; tipo: 'Fixo' | 'Variável'; desde: number; teto: (rlAnterior: number, degrau: number) => number };
 
+// Custos mensais por degrau do docs/18 seção 2 (valores (E) a orçar).
 const ITENS_CUSTO: ItemCusto[] = [
   { item: 'VPS da FESB (rateio de 25%)', tipo: 'Fixo', desde: 0, teto: () => 25 },
-  { item: 'Domínio (rateio anual)', tipo: 'Fixo', desde: 0, teto: () => 5 },
-  { item: 'Ferramentas gratuitas (formulários, analytics)', tipo: 'Fixo', desde: 0, teto: () => 0 },
-  { item: 'Vídeo por uso', tipo: 'Variável', desde: 0, teto: () => 30 },
-  { item: 'E-mail marketing pago', tipo: 'Fixo', desde: 1, teto: () => 150 },
+  { item: 'Domínio (R$ 40/ano)', tipo: 'Fixo', desde: 0, teto: () => 3.33 },
+  { item: '2 caixas de e-mail Hostinger (48 meses)', tipo: 'Fixo', desde: 0, teto: () => 4.98 },
+  { item: 'Bunny Stream (por uso)', tipo: 'Variável', desde: 0, teto: (_rl, d) => [35, 50, 100, 200][d] },
+  { item: 'E-mail marketing (Brevo)', tipo: 'Fixo', desde: 1, teto: (_rl, d) => (d >= 3 ? 250 : 100) },
+  { item: 'Resend, transacional (plano Pro)', tipo: 'Fixo', desde: 2, teto: () => 110 },
   { item: 'Tráfego pago', tipo: 'Variável', desde: 1, teto: (rl, d) => Math.round(rl * (d >= 2 ? 0.2 : 0.15)) },
   { item: 'API de cotações', tipo: 'Fixo', desde: 2, teto: () => 250 },
   { item: 'IA (uso)', tipo: 'Variável', desde: 2, teto: () => 200 },
@@ -89,15 +94,16 @@ const ITENS_CUSTO: ItemCusto[] = [
 
 export const TRAFEGO_PCT = ['sem tráfego pago', '15% da receita líquida do mês anterior', '20% da receita líquida do mês anterior', '20% da receita líquida do mês anterior'];
 
-// Fila de implantação, em ordem de prioridade de quitação.
+// Fila de implantação, em ordem de prioridade de quitação (docs/18 seção 1.1, valor base). Horas da FESB não
+// entram: são o aporte dela (cláusula 7.5).
 export const IMPLANTACAO = [
-  { item: 'Revisão jurídica dos termos e avisos regulatórios', valor: 1200 },
-  { item: 'Configuração do gateway e do checkout', valor: 300 },
-  { item: 'Sequência de 7 e-mails (texto e automação)', valor: 900 },
-  { item: 'Diagramação do Dicionário do Investidor (isca)', valor: 800 },
-  { item: 'Calculadoras da isca', valor: 600 },
-  { item: 'Identidade visual definitiva', valor: 1500 },
-  { item: 'Edição complementar das aulas', valor: 1800 },
+  { item: 'Domínio .com.br, 1º ano', valor: 40 },
+  { item: 'Material impresso com QR code', valor: 300 },
+  { item: '2 caixas de e-mail Hostinger, 48 meses', valor: 239.04 },
+  { item: 'Revisão jurídica: contrato, termos e privacidade', valor: 3500 },
+  { item: 'Sessão de fotos do CHD', valor: 1150 },
+  { item: 'Registro da marca no INPI', valor: 900 },
+  { item: 'Parecer regulatório da assinatura', valor: 5500 },
 ];
 
 export const IMPLANTACAO_TOTAL = IMPLANTACAO.reduce((a, x) => a + x.valor, 0);
@@ -164,8 +170,12 @@ export type Mes = {
   checkoutsIniciados: number;
 };
 
-function linha(bruto: number, transacoes: number, reembPct: number, comGateway: boolean): LinhaMes {
-  const gateway = comGateway ? r2(bruto * GATEWAY_PCT + transacoes * GATEWAY_FIXO) : 0;
+// Gateway Asaas: metade das cobranças no PIX (fixo) e metade no cartão (percentual + fixo). O bump vai na mesma
+// cobrança do curso: no PIX não paga taxa própria e no cartão paga só o percentual.
+function linha(bruto: number, transacoes: number, reembPct: number, comGateway: boolean, mesmaCobranca = false): LinhaMes {
+  const pix = mesmaCobranca ? 0 : transacoes * PARTE_PIX * PIX_FIXO;
+  const cartao = bruto * (1 - PARTE_PIX) * CARTAO_PCT + (mesmaCobranca ? 0 : transacoes * (1 - PARTE_PIX) * CARTAO_FIXO);
+  const gateway = comGateway ? r2(pix + cartao) : 0;
   const impostos = r2(bruto * IMPOSTO);
   const reembolsos = r2(bruto * reembPct);
   return { bruto, gateway, impostos, reembolsos, liquido: r2(bruto - gateway - impostos - reembolsos), transacoes };
@@ -202,8 +212,8 @@ function gerar(): Mes[] {
     const youtube = Math.round(entre(180, 260) + i * entre(55, 75));
 
     const linhas: Record<LinhaId, LinhaMes> = {
-      curso: linha(cursos * TICKET_CURSO, cursos, entre(0.02, 0.05), true),
-      bumps: linha(bumps * TICKET_BUMP, bumps, entre(0.01, 0.03), true),
+      curso: linha(cursos * TICKET_CURSO, cursos, entre(0.015, 0.025), true),
+      bumps: linha(bumps * TICKET_BUMP, bumps, entre(0.01, 0.03), true, true),
       saas: linha(assinantes * TICKET_SAAS, assinantes, entre(0.005, 0.015), true),
       youtube: linha(youtube, 0, 0, false),
     };
@@ -223,7 +233,7 @@ function gerar(): Mes[] {
 
     // Receita do mês não cobre os custos: cada Parte aporta metade da diferença.
     const aporte = r2(Math.max(0, custosRealizados - liquido) / 2);
-    // Devolução dos aportes de implantação: 40% da margem do mês, na ordem da fila, metade para cada Parte.
+    // Devolução dos aportes de implantação: QUITACAO_PCT da margem do mês, na ordem da fila, metade para cada Parte.
     let disponivel = Math.max(0, r2((liquido - custosRealizados) * QUITACAO_PCT));
     const quitacao: { item: string; valor: number }[] = [];
     saldoImplantacao = saldoImplantacao.map((saldo, k) => {
