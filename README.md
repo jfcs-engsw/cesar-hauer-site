@@ -13,7 +13,8 @@ Publicado para avaliação em https://jfcs-engsw.github.io/cesar-hauer-site/ (fo
 | Checkout (PIX e cartão parcelado) | Simulado no navegador; nenhuma cobrança |
 | Área do aluno (`/#/portal`): login por link mágico, meus cursos, módulos com progresso, aula com player, concluir | Real, servida pela API `chd-plataforma-api` em `/api` (FSEB-SW/dnn2-consultoria-investimentos#17); sem a API no ar, aponta para a prévia em `/#/portal/previa` (layout com progresso no navegador) |
 | Agenda de consultoria (horário, dados, pagamento, confirmação com .ics) | Simulada; link do Teams de exemplo |
-| Gestão da parceria CHD + FESB (`/#/gestao`, link discreto no rodapé): visão geral, receitas, custos por degrau, prestação de contas imprimível, funil e metas | Entrada simulada, sem login real; dados simulados determinísticos em `src/content/gestao.ts` |
+| Gestão da parceria CHD + FESB (`/#/gestao`, link discreto no rodapé): visão geral, orçamento (previsto x realizado e fila de quitação), lançamentos com comprovante e estorno, aportes, prestação de contas com exportação CSV | Dados reais da `chd-plataforma-api` (`/api/gestao`) com Entrar com Google e lista fechada de e-mails; sem sessão, mostra a entrada e o link para a demonstração |
+| Demonstração do painel (`/#/gestao/demo`): visão geral, receitas, custos por degrau, prestação de contas, funil e metas | Dados simulados determinísticos em `src/content/gestao.ts`, com taxas e custos do docs/18 |
 
 ## Fica para as próximas etapas
 
