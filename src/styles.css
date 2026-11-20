@@ -2158,6 +2158,55 @@ a {
   font-size: 0.875rem;
 }
 
+/* Painel real: avisos, formulários e ações nas tabelas */
+.g-alert {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #f6e0dc;
+  color: #8a2c1d;
+  font-size: 0.875rem;
+}
+
+.g-linha {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.g-acts,
+.g-doc__acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.g-form__grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.g-form__largo {
+  grid-column: 1 / -1;
+}
+
+.g-file {
+  position: relative;
+  display: inline-block;
+  font-size: 0.8125rem;
+  color: var(--petrol-700);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.g-file input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
 /* Entrada simulada */
 .g-login {
   min-height: 100vh;
