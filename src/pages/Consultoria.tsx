@@ -296,7 +296,7 @@ export function Agendar() {
               <a className="btn btn--ghost" href={booking.teams} onClick={(e) => e.preventDefault()}>
                 Link do Teams (exemplo)
               </a>
-              <Link to="/portal" className="btn btn--ghost">
+              <Link to="/portal/previa" className="btn btn--ghost">
                 Ver na área do aluno
               </Link>
             </div>
