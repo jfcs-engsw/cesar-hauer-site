@@ -1,5 +1,6 @@
-import { useState, type FormEvent, type ReactNode } from 'react';
+import { useState } from 'react';
 import { Link, NavLink, useParams } from 'react-router-dom';
+import { Badge, H, Kpi, Tabela, type Col } from '../components/GestaoUi';
 import {
   APORTE_INICIAL,
   DADOS,
@@ -21,9 +22,9 @@ import {
   statusMarcos,
   type Mes,
 } from '../content/gestao';
-import { load, save } from '../lib/util';
 
-// Área de gestão da parceria CHD + FESB. Protótipo: entrada simulada, dados simulados, nada de backend.
+// Demonstração do painel de gestão da parceria CHD + FESB: dados simulados (content/gestao.ts), sem backend.
+// O painel real (dados da API, com Entrar com Google) fica em Gestao.tsx.
 
 const rs = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const n = (v: number) => v.toLocaleString('pt-BR');
@@ -39,16 +40,10 @@ const ABAS = [
   ['metas', 'Metas'],
 ] as const;
 
-export default function Gestao() {
+export default function GestaoDemo() {
   const { aba = '' } = useParams();
-  const [perfil, setPerfil] = useState(() => load().gestao);
   const [sel, setSel] = useState(ULTIMO_FECHADO);
-  if (!perfil) return <Entrada onEntrar={setPerfil} />;
   const m = DADOS[sel];
-  const sair = () => {
-    save({ gestao: '' });
-    setPerfil('');
-  };
 
   return (
     <div className="g">
@@ -59,10 +54,9 @@ export default function Gestao() {
             <strong className="g-bar__title">CHD + FESB</strong>
           </div>
           <div className="g-bar__acts">
-            <span className="g-bar__user">Perfil: {perfil}</span>
-            <button className="btn btn--outline-light btn--sm" onClick={sair}>
-              Sair
-            </button>
+            <Link to="/gestao" className="btn btn--outline-light btn--sm">
+              Painel real
+            </Link>
             <Link to="/" className="btn btn--outline-light btn--sm">
               Voltar ao site
             </Link>
@@ -71,14 +65,14 @@ export default function Gestao() {
       </header>
       <div className="g-notice g-noprint" role="note">
         <div className="g-wrap">
-          Área restrita a FESB e CHD. Protótipo com dados simulados e entrada sem login real. Data de referência
-          simulada: {DATA_REFERENCIA}.
+          Demonstração com dados simulados, sem relação com valores reais. Data de referência simulada:{' '}
+          {DATA_REFERENCIA}. O painel real exige Entrar com Google.
         </div>
       </div>
       <nav className="g-tabs g-noprint" aria-label="Seções da gestão">
         <div className="g-wrap g-tabs__inner">
           {ABAS.map(([to, label]) => (
-            <NavLink key={to} to={`/gestao${to ? `/${to}` : ''}`} end className="g-tab">
+            <NavLink key={to} to={`/gestao/demo${to ? `/${to}` : ''}`} end className="g-tab">
               {label}
             </NavLink>
           ))}
@@ -105,127 +99,6 @@ export default function Gestao() {
       </main>
     </div>
   );
-}
-
-function Entrada({ onEntrar }: { onEntrar: (p: string) => void }) {
-  const [p, setP] = useState('FESB');
-  const entrar = (e: FormEvent) => {
-    e.preventDefault();
-    save({ gestao: p });
-    onEntrar(p);
-  };
-  return (
-    <div className="g-login">
-      <form className="g-login__card form" onSubmit={entrar}>
-        <p className="eyebrow eyebrow--dark">Área restrita</p>
-        <h1>Gestão da parceria CHD + FESB</h1>
-        <p className="hint">
-          Acesso restrito a FESB e CHD. Protótipo: a entrada é simulada, nenhuma senha é conferida ou guardada.
-        </p>
-        <label>
-          Perfil
-          <select value={p} onChange={(e) => setP(e.target.value)}>
-            <option value="FESB">FESB</option>
-            <option value="CHD">CHD</option>
-          </select>
-        </label>
-        <label>
-          E-mail
-          <input type="email" placeholder="nome@exemplo.com.br" autoComplete="off" />
-        </label>
-        <label>
-          Senha
-          <input type="password" autoComplete="off" />
-        </label>
-        <button className="btn btn--primary btn--block" type="submit">
-          Entrar (simulado)
-        </button>
-        <Link to="/" className="link">
-          Voltar ao site
-        </Link>
-      </form>
-    </div>
-  );
-}
-
-/* Peças comuns */
-
-function H({ title, children }: { title: string; children?: ReactNode }) {
-  return (
-    <header className="g-head">
-      <h2>{title}</h2>
-      {children && <p className="hint">{children}</p>}
-    </header>
-  );
-}
-
-type Col = { h: string; num?: boolean };
-
-function Tabela({ titulo, cols, rows, foot }: { titulo: string; cols: Col[]; rows: ReactNode[][]; foot?: ReactNode[][] }) {
-  return (
-    <div className="g-table-wrap">
-      <table className="g-table">
-        <caption>{titulo}</caption>
-        <thead>
-          <tr>
-            <th className="g-num">#</th>
-            {cols.map((c) => (
-              <th key={c.h} className={c.num ? 'g-num' : undefined}>
-                {c.h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={i}>
-              <td className="g-num g-idx">{i + 1}</td>
-              {r.map((c, k) => (
-                <td key={k} className={cols[k].num ? 'g-num' : undefined}>
-                  {c}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-        {foot && (
-          <tfoot>
-            {foot.map((f, i) => (
-              <tr key={i}>
-                <td />
-                {f.map((c, k) => (
-                  <td key={k} className={cols[k].num ? 'g-num' : undefined}>
-                    {c}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tfoot>
-        )}
-      </table>
-    </div>
-  );
-}
-
-function Kpi({ label, value, sub, tone }: { label: string; value: string; sub?: ReactNode; tone?: 'fesb' | 'chd' }) {
-  return (
-    <div className={`g-kpi ${tone ? `g-kpi--${tone}` : ''}`}>
-      <p className="g-kpi__label">{label}</p>
-      <p className="g-kpi__value">{value}</p>
-      {sub && <p className="g-kpi__sub">{sub}</p>}
-    </div>
-  );
-}
-
-function Badge({ s }: { s: string }) {
-  const tone = /Atingido|Pago|Quitado/.test(s)
-    ? 'ok'
-    : /Revisão|Abaixo de 70/.test(s)
-      ? 'bad'
-      : /tolerância|Previsto|Em quitação/.test(s)
-        ? 'warn'
-        : 'neutral';
-  return <span className={`g-badge g-badge--${tone}`}>{s}</span>;
 }
 
 /* 1. Visão geral */
