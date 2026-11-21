@@ -197,7 +197,9 @@ a {
   border-radius: 8px;
   background: var(--petrol-800);
   color: var(--gold);
-  font: 600 1.05rem var(--serif);
+  /* Monograma CHD: três letras num corpo menor, para caber no quadro de 40 px. */
+  font: 600 0.875rem var(--serif);
+  letter-spacing: 0.02em;
 }
 
 .logo__name {

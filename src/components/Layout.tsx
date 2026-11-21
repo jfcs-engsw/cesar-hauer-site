@@ -13,10 +13,10 @@ const NAV = [
 
 export function Logo() {
   return (
-    <Link to="/" className="logo" aria-label="Cesar Hauer, página inicial">
-      <span className="logo__mark">CH</span>
+    <Link to="/" className="logo" aria-label="Cesar Hauer Doetzer, página inicial">
+      <span className="logo__mark">CHD</span>
       <span className="logo__name">
-        Cesar Hauer
+        Cesar Hauer Doetzer
         <small>Investimentos com método</small>
       </span>
     </Link>
