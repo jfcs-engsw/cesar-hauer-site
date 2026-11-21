@@ -124,9 +124,14 @@ export function PortalHome() {
         <div className="portal-topo">
           <h1 className="section__title">{eu ? `Olá, ${eu.nome.split(' ')[0] || 'aluno'}` : 'Área do aluno'}</h1>
           {eu && (
-            <button className="btn btn--ghost btn--sm" onClick={sair}>
-              Sair
-            </button>
+            <span className="portal-acoes">
+              <Link to="/portal/configuracoes" className="btn btn--ghost btn--sm">
+                Configurações
+              </Link>
+              <button className="btn btn--ghost btn--sm" onClick={sair}>
+                Sair
+              </button>
+            </span>
           )}
         </div>
         {estado === 'carregando' && <p className="hint">Carregando...</p>}

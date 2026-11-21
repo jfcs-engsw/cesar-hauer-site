@@ -55,6 +55,30 @@ export type ModuloItem = {
 export type CursoDetalhe = CursoResumo & { modulos: ModuloItem[] };
 export type Player = { aula_id: number; tipo: 'video' | 'iframe'; url: string; expira_em: number | null };
 
+export type Notificacoes = { aviso_aulas_novas: boolean; aviso_novidades: boolean; aviso_ofertas: boolean };
+export type Fiscal = {
+  tipo: 'PF' | 'PJ';
+  documento: string;
+  nome: string;
+  email_nf: string;
+  cep: string;
+  logradouro: string;
+  numero: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+};
+export type Configuracoes = {
+  perfil: { nome: string; email: string };
+  notificacoes: Notificacoes;
+  fiscal: Fiscal | null;
+  troca_email_pendente: string | null;
+};
+
+const enviar = <T>(metodo: 'POST' | 'PUT', caminho: string, corpo: unknown) =>
+  req<T>(caminho, { method: metodo, body: JSON.stringify(corpo) });
+
 export const api = {
   pedirLink: (email: string) =>
     req<{ mensagem: string }>('/auth/link', { method: 'POST', body: JSON.stringify({ email }) }),
@@ -63,6 +87,11 @@ export const api = {
   cursos: () => req<CursoResumo[]>('/cursos'),
   curso: (id: number | string) => req<CursoDetalhe>(`/cursos/${id}`),
   player: (aulaId: number | string) => req<Player>(`/aulas/${aulaId}/player`),
+  configuracoes: () => req<Configuracoes>('/eu/configuracoes'),
+  salvarPerfil: (nome: string) => enviar<{ nome: string; email: string }>('PUT', '/eu/perfil', { nome }),
+  salvarNotificacoes: (n: Notificacoes) => enviar<Notificacoes>('PUT', '/eu/notificacoes', n),
+  salvarFiscal: (f: Fiscal) => enviar<Fiscal>('PUT', '/eu/fiscal', { ...f, email_nf: f.email_nf || null }),
+  trocarEmail: (novo_email: string) => enviar<{ mensagem: string }>('POST', '/eu/email', { novo_email }),
   concluir: (aulaId: number | string) =>
     req<{ aula_id: number; concluida: boolean; concluidas: number; total_aulas: number }>(
       `/aulas/${aulaId}/concluir`,
