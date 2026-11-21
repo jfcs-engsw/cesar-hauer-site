@@ -1385,6 +1385,59 @@ a {
   margin: 20px 0 32px;
 }
 
+/* Área do aluno com login */
+.portal-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.portal-resumo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 8px 0 24px;
+}
+
+.portal-resumo .progress {
+  flex: 1 1 260px;
+}
+
+.portal-erro {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--gold-text);
+}
+
+.portal-feita {
+  font-size: 0.8125rem;
+  color: var(--petrol-600);
+}
+
+.syllabus__mod li a {
+  color: var(--text);
+}
+
+.syllabus__mod li a.is-done {
+  color: var(--petrol-600);
+}
+
+.video {
+  overflow: hidden;
+}
+
+.video__media {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: var(--ink);
+}
+
 .player__tabs h2 {
   font-size: 1.125rem;
   margin: 24px 0 8px;

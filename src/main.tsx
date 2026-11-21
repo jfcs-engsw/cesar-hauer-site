@@ -8,7 +8,8 @@ import { Layout } from './components/Layout';
 import Home from './pages/Home';
 import { Blog, Contato, Cursos, Legal, Livro, Metodo, NotFound, Palestras, Post, Sobre } from './pages/Institucional';
 import { Checkout, CursoVenda, Sucesso } from './pages/Curso';
-import { PortalAula, PortalHome } from './pages/Portal';
+import { PortalAula, PortalCurso, PortalHome } from './pages/Portal';
+import { PortalPreviaAula, PortalPreviaHome } from './pages/PortalPrevia';
 import { Agendar, Consultoria } from './pages/Consultoria';
 import Gestao from './pages/Gestao';
 
@@ -29,7 +30,10 @@ createRoot(document.getElementById('root')!).render(
           <Route path="checkout/sucesso" element={<Sucesso />} />
           <Route path="checkout/:slug" element={<Checkout />} />
           <Route path="portal" element={<PortalHome />} />
-          <Route path="portal/:slug/:aula?" element={<PortalAula />} />
+          <Route path="portal/curso/:cursoId" element={<PortalCurso />} />
+          <Route path="portal/curso/:cursoId/aula/:aulaId" element={<PortalAula />} />
+          <Route path="portal/previa" element={<PortalPreviaHome />} />
+          <Route path="portal/:slug/:aula?" element={<PortalPreviaAula />} />
           <Route path="consultoria" element={<Consultoria />} />
           <Route path="consultoria/agendar" element={<Agendar />} />
           <Route path="blog" element={<Blog />} />
