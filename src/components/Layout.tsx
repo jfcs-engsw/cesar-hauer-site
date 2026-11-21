@@ -101,10 +101,7 @@ function Footer() {
           Resolução CVM 19/2021.
         </p>
         <p>
-          © {new Date().getFullYear()} Cesar Hauer. Todos os direitos reservados.{' '}
-          <Link to="/gestao" className="footer__restrito">
-            Gestão
-          </Link>
+          © {new Date().getFullYear()} Cesar Hauer. Todos os direitos reservados.
         </p>
       </div>
     </footer>

@@ -13,7 +13,8 @@ Publicado para avaliação em https://jfcs-engsw.github.io/cesar-hauer-site/ (fo
 | Checkout (PIX e cartão parcelado) | Simulado no navegador; nenhuma cobrança |
 | Área do aluno (`/#/portal`): login por link mágico, meus cursos, módulos com progresso, aula com player, concluir | Real, servida pela API `chd-plataforma-api` em `/api` (FSEB-SW/dnn2-consultoria-investimentos#17); sem a API no ar, aponta para a prévia em `/#/portal/previa` (layout com progresso no navegador) |
 | Agenda de consultoria (horário, dados, pagamento, confirmação com .ics) | Simulada; link do Teams de exemplo |
-| Gestão da parceria CHD + FESB (`/#/gestao`, link discreto no rodapé): visão geral, receitas, custos por degrau, prestação de contas imprimível, funil e metas | Entrada simulada, sem login real; dados simulados determinísticos em `src/content/gestao.ts` |
+| Configurações do aluno (`/#/portal/configuracoes`): perfil, troca de e-mail confirmada pelo endereço novo, avisos por e-mail e dados para a nota fiscal | Real, pela `chd-plataforma-api` (`/api/eu/...`) |
+| Gestão da parceria | Saiu do site: é o app próprio `FSEB-SW/chd-painel`, num subdomínio. `/#/gestao` leva ao painel quando o build tem `VITE_PAINEL_URL`; sem ela, mostra o aviso de mudança de endereço |
 
 ## Fica para as próximas etapas
 

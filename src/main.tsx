@@ -11,14 +11,15 @@ import { Checkout, CursoVenda, Sucesso } from './pages/Curso';
 import { PortalAula, PortalCurso, PortalHome } from './pages/Portal';
 import { PortalPreviaAula, PortalPreviaHome } from './pages/PortalPrevia';
 import { Agendar, Consultoria } from './pages/Consultoria';
-import Gestao from './pages/Gestao';
+import PainelRedirect from './pages/PainelRedirect';
+import Configuracoes from './pages/Configuracoes';
 
 // HashRouter: o GitHub Pages não reescreve rotas. Na hospedagem definitiva, troca por rotas limpas.
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
       <Routes>
-        <Route path="gestao/:aba?" element={<Gestao />} />
+        <Route path="gestao/*" element={<PainelRedirect />} />
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="sobre" element={<Sobre />} />
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="checkout/sucesso" element={<Sucesso />} />
           <Route path="checkout/:slug" element={<Checkout />} />
           <Route path="portal" element={<PortalHome />} />
+          <Route path="portal/configuracoes" element={<Configuracoes />} />
           <Route path="portal/curso/:cursoId" element={<PortalCurso />} />
           <Route path="portal/curso/:cursoId/aula/:aulaId" element={<PortalAula />} />
           <Route path="portal/previa" element={<PortalPreviaHome />} />
