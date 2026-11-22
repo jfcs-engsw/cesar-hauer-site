@@ -1,0 +1,34 @@
+// Dados do site que mudam sem mexer em componente. Nenhum segredo aqui: só endereços públicos.
+
+export const SITE = {
+  // Domínio definitivo, comprado pelo Cesar no Registro.br (docs/deploy/dominio-cesarhauer-com-br.md).
+  url: 'https://cesarhauer.com.br',
+  nome: 'Cesar Hauer Doetzer',
+};
+
+export const LIVRO = {
+  titulo: 'Educação Financeira: A Tríade do Capital',
+  editora: 'Editora CRV',
+  primeiraEdicao: 2019,
+  // Lançamento da edição revisada: evento de 30/11/2026.
+  lancamento: '30 de novembro de 2026',
+  // Link de compra no site da editora. Vazio até o Cesar mandar: a página mostra o aviso "em breve".
+  linkEditora: '',
+};
+
+export const LISTA_ESPERA = {
+  curso: 'Formação de Investidores',
+  // Formulário hospedado da Brevo (lista "Tríade do Capital: lista de espera", confirmação em duas etapas).
+  // Endereço público do formulário, sem chave; criado na conta da Brevo (docs/deploy/lista-de-espera-brevo.md).
+  // Vazio até o formulário existir: a página mostra o aviso, nunca um formulário morto.
+  formUrl: '',
+  // Altura do quadro embutido. Ajustar depois de ver o formulário publicado.
+  formAltura: 620,
+};
+
+export const CONTATO = {
+  // E-mail público de contato, a confirmar com o Cesar. Vazio: a página não mostra endereço.
+  email: '',
+  linkedin: '',
+  instagram: '',
+};

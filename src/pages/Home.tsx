@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Cards, ContactBand, Faq, Portrait, Section, Stats } from '../components/Blocks';
+import { Cards, ContactBand, Faq, Portrait, Section } from '../components/Blocks';
 import { COURSE, MODULES } from '../content/curso';
 import { POSTS } from '../content/posts';
-import { brl } from '../lib/util';
+import { LIVRO } from '../content/site';
 
 export default function Home() {
   return (
@@ -13,20 +13,19 @@ export default function Home() {
             <p className="eyebrow">Consultor CVM · Professor · Palestrante · Autor</p>
             <h1 className="hero__title">Investir com método, não com palpite.</h1>
             <p className="hero__lead">
-              Engenheiro, consultor de valores mobiliários registrado na CVM e autor de <em>Educação Financeira: A Tríade
-              do Capital</em>. Há mais de uma década ajudo pessoas e famílias a construir patrimônio com rigor técnico e
-              disciplina.
+              Engenheiro, consultor de valores mobiliários registrado na CVM e autor de <em>{LIVRO.titulo}</em>. Há mais
+              de uma década ajudo pessoas e famílias a construir patrimônio com rigor técnico e disciplina.
             </p>
             <div className="hero__actions">
-              <Link to="/cursos/formacao-de-investidores" className="btn btn--accent btn--lg">
-                Conhecer o curso
+              <Link to="/livro" className="btn btn--accent btn--lg">
+                Conhecer o livro
               </Link>
-              <Link to="/consultoria/agendar" className="btn btn--ghost btn--lg">
-                Agendar uma consultoria
+              <Link to="/lista-de-espera" className="btn btn--ghost btn--lg">
+                Lista de espera do curso
               </Link>
             </div>
           </div>
-          <Portrait caption="Cesar Hauer, CEA · CFG · CGA" />
+          <Portrait caption="Cesar Hauer Doetzer, CEA · CFG · CGA" />
         </div>
       </section>
 
@@ -42,32 +41,34 @@ export default function Home() {
         </div>
       </section>
 
-      <Section eyebrow="Autoridade" title="Experiência que se mede">
-        <Stats
-          items={[
-            { value: '10+', label: 'anos de histórico de carteira documentado' },
-            { value: 'R$ 50 mi', label: 'sob consultoria' },
-            { value: '59', label: 'aulas no curso Formação de Investidores' },
-            { value: '2019', label: 'primeira edição do livro' },
-          ]}
-          source="Fonte: perfil profissional público e histórico 2014-2024. Valores a confirmar com o Cesar antes da publicação."
-        />
+      <Section eyebrow="Lançamento" title={LIVRO.titulo} lead={`Edição revisada, lançada em ${LIVRO.lancamento}.`}>
+        <div className="split split--even">
+          <p className="prose-lead">
+            A base conceitual de todo o trabalho: como renda, poupança e investimento se combinam para formar patrimônio,
+            e os fundamentos do Método PARSIFAL.
+          </p>
+          <div>
+            <Link to="/livro" className="btn btn--primary">
+              Ver o livro
+            </Link>
+          </div>
+        </div>
       </Section>
 
       <Section tone="muted" eyebrow="Como posso ajudar" title="Quatro caminhos, um mesmo método">
         <Cards
           cols={4}
           items={[
-            { tag: 'Aprender', title: 'Cursos gravados', text: 'Formação completa, do sistema financeiro à montagem de carteira, no seu ritmo.' },
+            { tag: 'Ler', title: 'Livro', text: `${LIVRO.titulo}, a base conceitual do método.` },
+            { tag: 'Aprender', title: 'Curso online', text: 'Formação completa, do sistema financeiro à montagem de carteira, no seu ritmo. Em breve.' },
             { tag: 'Decidir', title: 'Consultoria', text: 'Sessões individuais por videoconferência para analisar o seu caso com recomendação personalizada.' },
             { tag: 'Inspirar', title: 'Palestras', text: 'Educação financeira para empresas, eventos e instituições de ensino.' },
-            { tag: 'Ler', title: 'Livro', text: 'Educação Financeira: A Tríade do Capital, a base conceitual do método.' },
           ]}
         />
       </Section>
 
       <Section
-        eyebrow="Curso âncora"
+        eyebrow="Curso em breve"
         title={COURSE.title}
         lead="Um curso raro no mercado: leva o aluno até as ferramentas profissionais de carteira e valuation, com exercícios e estudos de caso."
       >
@@ -82,15 +83,14 @@ export default function Home() {
             ))}
           </ul>
           <aside className="offer">
-            <p className="offer__label">Preço de lançamento</p>
-            <p className="offer__price">{brl(COURSE.launchPrice)}</p>
+            <p className="offer__label">Inscrições em breve</p>
             <p className="offer__note">
-              ou {COURSE.installments}x de {brl(COURSE.installmentValue)} no preço cheio de {brl(COURSE.fullPrice)}
+              Quem está na lista de espera recebe primeiro a data de abertura e as condições de lançamento.
             </p>
-            <Link to="/checkout/formacao-de-investidores" className="btn btn--accent btn--block">
-              Quero me inscrever
+            <Link to="/lista-de-espera" className="btn btn--accent btn--block">
+              Entrar na lista de espera
             </Link>
-            <Link to="/cursos/formacao-de-investidores" className="btn btn--ghost btn--block">
+            <Link to={`/cursos/${COURSE.slug}`} className="btn btn--ghost btn--block">
               Ver o programa completo
             </Link>
           </aside>
@@ -127,18 +127,18 @@ export default function Home() {
         <Faq
           items={[
             ['O curso serve para quem está começando?', 'Sim. Ele parte do sistema financeiro e da matemática financeira e avança até gestão de carteiras e valuation.'],
-            ['Por quanto tempo tenho acesso?', 'Acesso por 12 meses, com todas as atualizações publicadas no período (a confirmar).'],
-            ['A consultoria é individual?', 'Sim. Cada sessão é individual, por Microsoft Teams, com 60 minutos e agenda escolhida por você.'],
+            ['Quando as inscrições abrem?', 'Em breve. A data é anunciada primeiro para quem está na lista de espera.'],
+            ['A consultoria é individual?', 'Sim. Cada sessão é individual, por videoconferência, após a análise do seu perfil.'],
             ['O conteúdo é recomendação de investimento?', 'Não. Cursos, artigos e palestras são educacionais. Recomendação personalizada só na consultoria, nos termos da CVM.'],
           ]}
         />
       </Section>
 
       <ContactBand
-        title="Quer olhar o seu caso com quem faz isso todos os dias?"
-        text="Escolha um horário livre na agenda, faça o pagamento e receba o link da reunião."
-        to="/consultoria/agendar"
-        label="Ver horários disponíveis"
+        title="Quer ser avisado da abertura do curso?"
+        text="Entre na lista de espera e receba a data, as condições de lançamento e conteúdo de preparação."
+        to="/lista-de-espera"
+        label="Entrar na lista de espera"
       />
     </>
   );

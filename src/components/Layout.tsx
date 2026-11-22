@@ -33,9 +33,6 @@ export function Layout() {
 
   return (
     <>
-      <div className="proto-banner" role="note">
-        Protótipo para avaliação. Pagamentos, agendamentos e área do aluno são simulados.
-      </div>
       <header className="header">
         <div className="container header__inner">
           <Logo />
@@ -48,11 +45,8 @@ export function Layout() {
                 {label}
               </NavLink>
             ))}
-            <Link to="/portal" className="btn btn--ghost btn--sm">
-              Área do aluno
-            </Link>
-            <Link to="/consultoria/agendar" className="btn btn--accent btn--sm">
-              Agendar consultoria
+            <Link to="/lista-de-espera" className="btn btn--accent btn--sm">
+              Lista de espera do curso
             </Link>
           </nav>
         </div>
@@ -77,21 +71,22 @@ function Footer() {
           </p>
         </div>
         <FooterCol title="Conteúdo">
-          <Link to="/cursos">Cursos</Link>
-          <Link to="/metodo">Método PARSIFAL</Link>
           <Link to="/livro">Livro</Link>
+          <Link to="/metodo">Método PARSIFAL</Link>
+          <Link to="/cursos">Cursos</Link>
+          <Link to="/lista-de-espera">Lista de espera</Link>
           <Link to="/blog">Artigos</Link>
         </FooterCol>
         <FooterCol title="Serviços">
           <Link to="/consultoria">Consultoria</Link>
-          <Link to="/consultoria/agendar">Agendar uma sessão</Link>
           <Link to="/palestras">Palestras e eventos</Link>
           <Link to="/contato">Contato</Link>
+          <Link to="/portal">Área do aluno</Link>
         </FooterCol>
         <FooterCol title="Legal">
-          <Link to="/legal/avisos">Avisos regulatórios</Link>
-          <Link to="/legal/privacidade">Privacidade (LGPD)</Link>
-          <Link to="/legal/termos">Termos de uso</Link>
+          <Link to="/avisos">Avisos regulatórios</Link>
+          <Link to="/privacidade">Política de privacidade</Link>
+          <Link to="/termos">Termos de uso</Link>
         </FooterCol>
       </div>
       <div className="container footer__legal">
@@ -101,7 +96,7 @@ function Footer() {
           Resolução CVM 19/2021.
         </p>
         <p>
-          © {new Date().getFullYear()} Cesar Hauer. Todos os direitos reservados.
+          © {new Date().getFullYear()} Cesar Hauer Doetzer. Todos os direitos reservados.
         </p>
       </div>
     </footer>
