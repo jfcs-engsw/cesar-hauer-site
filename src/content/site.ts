@@ -18,10 +18,10 @@ export const LIVRO = {
 
 export const LISTA_ESPERA = {
   curso: 'Formação de Investidores',
-  // Formulário hospedado da Brevo (lista "Tríade do Capital: lista de espera", confirmação em duas etapas).
-  // Endereço público do formulário, sem chave; criado na conta da Brevo (docs/deploy/lista-de-espera-brevo.md).
-  // Vazio até o formulário existir: a página mostra o aviso, nunca um formulário morto.
-  formUrl: '',
+  // Formulário hospedado da Brevo (lista "Tríade do Capital: lista de espera"), publicado em 22/11/2026.
+  // Endereço público do formulário, sem chave (docs/deploy/lista-de-espera-brevo.md).
+  // Confirmação em duas etapas pendente de verificar o telefone na conta da Brevo; até lá, sem e-mail de confirmação.
+  formUrl: 'https://2d04463e.sibforms.com/serve/MUIFAA0nFgBRVlkDCK0Ijbyd6dZjljAQ67br-CZSH3sMGXDjB5pIjZsJYa4RXV2TyCQ4pDbZHbXs_Pxm2Y0iAVpPCAPevJPf4_ORVzRYjPXWq-zTDMfIkjxlxndOSSOkgIzCAsCHhbHzIojjRTSPqxKN2Wm7jPnH65dLxgrWWoEmyX9IFvBV2Mzqro_2ch7Q2VOhV9Xcedt4lsrqQw==',
   // Altura do quadro embutido. Ajustar depois de ver o formulário publicado.
   formAltura: 620,
 };
