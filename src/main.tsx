@@ -1,8 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import '@fontsource-variable/inter';
-import '@fontsource-variable/source-serif-4';
+import './marca-chd/tokens.css';
 import './styles.css';
 import { Layout } from './components/Layout';
 import Home from './pages/Home';
