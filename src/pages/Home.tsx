@@ -97,14 +97,14 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="muted" eyebrow="Método PARSIFAL" title="O que diferencia o trabalho">
+      <Section tone="dark" eyebrow="Método PARSIFAL" title="O que diferencia o trabalho">
         <div className="split split--even">
           <p className="prose-lead">
             O Método PARSIFAL organiza a seleção de ativos, o dimensionamento das posições e o rebalanceamento em regras
             explícitas. É o que sustenta os cursos, a mentoria e a consultoria, e é o que permite explicar cada decisão.
           </p>
           <div>
-            <Link to="/metodo" className="btn btn--primary">
+            <Link to="/metodo" className="btn btn--accent">
               Conhecer o método
             </Link>
           </div>
