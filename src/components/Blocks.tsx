@@ -60,7 +60,7 @@ export function Section({
 
 export function PageHero({ eyebrow, title, lead, children }: { eyebrow: string; title: ReactNode; lead?: ReactNode; children?: ReactNode }) {
   return (
-    <section className="page-hero" data-tone="dark">
+    <section className="page-hero">
       <div className="container">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="page-hero__title">{title}</h1>
@@ -132,7 +132,7 @@ export function Steps({ items }: { items: [string, string][] }) {
 
 export function ContactBand({ title, text, to, label }: { title: string; text: string; to: string; label: string }) {
   return (
-    <section className="band" data-tone="dark">
+    <section className="band">
       <div className="container band__inner">
         <div>
           <h2>{title}</h2>

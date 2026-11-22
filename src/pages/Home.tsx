@@ -7,7 +7,7 @@ import { brl } from '../lib/util';
 export default function Home() {
   return (
     <>
-      <section className="hero" data-tone="dark">
+      <section className="hero">
         <div className="container hero__inner">
           <div className="hero__text">
             <p className="eyebrow">Consultor CVM · Professor · Palestrante · Autor</p>
@@ -21,7 +21,7 @@ export default function Home() {
               <Link to="/cursos/formacao-de-investidores" className="btn btn--accent btn--lg">
                 Conhecer o curso
               </Link>
-              <Link to="/consultoria/agendar" className="btn btn--outline-light btn--lg">
+              <Link to="/consultoria/agendar" className="btn btn--ghost btn--lg">
                 Agendar uma consultoria
               </Link>
             </div>

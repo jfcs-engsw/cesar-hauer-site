@@ -18,7 +18,7 @@ export function CursoVenda() {
             Inscrever-me por {brl(COURSE.launchPrice)}
           </Link>
           <button
-            className="btn btn--outline-light btn--lg"
+            className="btn btn--ghost btn--lg"
             onClick={() => document.getElementById('programa')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Ver o programa

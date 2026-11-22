@@ -1,24 +1,27 @@
-/* Identidade provisória Cesar Hauer: verde-petróleo profundo, dourado como destaque único por tela,
-   títulos com serifa (tom editorial, de autor) e texto em Inter. Mobile-first. */
+/* Marca CHD v0.1.0 (fesb-design-system, marcas/chd, ADR-0004): fundo branco, petróleo em títulos e
+   ação, dourado só como filete e destaque, escuro só no rodapé. Plus Jakarta Sans em tudo. Mobile-first. */
 
 :root {
-  --ink: #0b1f1e;
-  --petrol-800: #0f3d3b;
-  --petrol-700: #145552;
-  --petrol-600: #1f6b67;
-  --petrol-100: #e4eeed;
-  --gold: #c9a45c;
+  /* Nomes antigos do site apontando para a marca CHD (src/marca-chd/tokens.css). */
+  --ink: var(--chd-petroleo-950);
+  --petrol-800: var(--chd-petroleo-800);
+  --petrol-700: var(--chd-petroleo-700);
+  --petrol-600: var(--chd-petroleo-500);
+  --petrol-100: var(--chd-petroleo-100);
+  --petrol-50: var(--chd-petroleo-50);
+  --gold: var(--chd-dourado-500);
   --gold-soft: #e3cf9f;
-  --gold-text: #8a672a;
-  --paper: #ffffff;
-  --muted: #f6f5f1;
-  --text: #1c2524;
-  --text-2: #55605e;
-  --border: #dcdfdc;
+  --gold-50: var(--chd-dourado-50);
+  --gold-text: var(--chd-dourado-700);
+  --paper: var(--chd-branco);
+  --muted: var(--chd-petroleo-50);
+  --text: var(--chd-petroleo-900);
+  --text-2: var(--chd-cinza-700);
+  --border: var(--chd-cinza-200);
   --radius: 10px;
-  --shadow: 0 1px 2px rgb(11 31 30 / 6%), 0 8px 24px rgb(11 31 30 / 6%);
-  --serif: 'Source Serif 4 Variable', Georgia, serif;
-  --sans: 'Inter Variable', system-ui, sans-serif;
+  --shadow: var(--sombra-1), var(--sombra-2);
+  --serif: var(--chd-fonte);
+  --sans: var(--chd-fonte);
   --ease: cubic-bezier(0.05, 0.7, 0.1, 1);
 }
 
@@ -42,9 +45,10 @@ h1,
 h2,
 h3 {
   font-family: var(--serif);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 a {
@@ -118,7 +122,7 @@ a {
 }
 
 .btn--accent:hover:not(:disabled) {
-  background: #b8924a;
+  background: var(--chd-dourado-600);
 }
 
 .btn--primary {
@@ -272,11 +276,13 @@ a {
 }
 
 /* Topo da página inicial */
-.hero,
-.page-hero,
-.band,
+.hero {
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+}
+
 .footer {
-  background: radial-gradient(120% 140% at 85% 0%, var(--petrol-700) 0%, var(--petrol-800) 45%, var(--ink) 100%);
+  background: var(--ink);
   color: #fff;
 }
 
@@ -297,12 +303,17 @@ a {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .eyebrow--dark,
 .section:not(.section--dark) .eyebrow {
   color: var(--gold-text);
+}
+
+.hero__text {
+  border-left: 4px solid var(--gold);
+  padding-left: 24px;
 }
 
 .hero__title {
@@ -318,7 +329,7 @@ a {
   max-width: 60ch;
   font-size: 1.125rem;
   line-height: 1.7;
-  color: #cfe0de;
+  color: var(--text-2);
 }
 
 .hero__actions {
@@ -341,6 +352,8 @@ a {
 
 .page-hero {
   padding: 56px 0;
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
 }
 
 .page-hero__title {
@@ -359,10 +372,8 @@ a {
 .portrait__frame {
   aspect-ratio: 4 / 5;
   border-radius: 14px;
-  background:
-    linear-gradient(160deg, rgb(201 164 92 / 18%), transparent 60%),
-    linear-gradient(0deg, rgb(11 31 30 / 60%), rgb(20 85 82 / 60%));
-  border: 1px solid rgb(201 164 92 / 40%);
+  background: var(--petrol-50);
+  border: 1px solid var(--border);
   display: grid;
   place-items: center;
 }
@@ -384,13 +395,8 @@ a {
 .portrait figcaption {
   margin-top: 12px;
   font-size: 0.875rem;
-  color: inherit;
-  opacity: 0.8;
+  color: var(--text-2);
   text-align: center;
-}
-
-.section .portrait__frame {
-  background: linear-gradient(160deg, var(--petrol-800), var(--ink));
 }
 
 /* Faixa de credenciais */
@@ -816,6 +822,8 @@ a {
 /* Faixa de contato e rodapé */
 .band {
   padding: 56px 0;
+  background: var(--gold-50);
+  border-top: 1px solid var(--border);
 }
 
 .band__inner {
@@ -831,7 +839,7 @@ a {
 
 .band p {
   margin: 8px 0 0;
-  color: #cfe0de;
+  color: var(--text-2);
 }
 
 @media (min-width: 900px) {
