@@ -1,7 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
 import { api, ApiErro, type CursoDetalhe, type CursoResumo, type Eu, type Player } from '../lib/api';
-import { Progress } from './PortalPrevia';
 
 // Área do aluno real: login por link mágico, cursos com matrícula ativa, aulas com player e progresso.
 // O acesso é decidido pela API (cookie HttpOnly); o front só mostra o que ela libera.
@@ -10,11 +9,25 @@ const INDISPONIVEL = (
   <article className="card">
     <h2 className="card__title">Área do aluno em implantação</h2>
     <p className="card__text">O acesso com login ainda não está disponível neste endereço.</p>
-    <Link to="/portal/previa" className="btn btn--ghost btn--block">
-      Ver a prévia da área do aluno
+    <Link to="/lista-de-espera" className="btn btn--ghost btn--block">
+      Entrar na lista de espera do curso
     </Link>
   </article>
 );
+
+export function Progress({ done, total }: { done: number; total: number }) {
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  return (
+    <div className="progress" aria-label={`${pct}% concluído`}>
+      <div className="progress__bar">
+        <span style={{ width: `${pct}%` }} />
+      </div>
+      <span className="progress__txt">
+        {done} de {total} aulas · {pct}%
+      </span>
+    </div>
+  );
+}
 
 function Entrar() {
   const [params] = useSearchParams();

@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Cards, ContactBand, PageHero, Portrait, Section, Steps } from '../components/Blocks';
 import { COURSE, MODULES } from '../content/curso';
 import { POSTS } from '../content/posts';
-import { brl } from '../lib/util';
+import { CONTATO, LIVRO } from '../content/site';
 
 export function Sobre() {
   return (
@@ -25,9 +25,8 @@ export function Sobre() {
               alto patrimônio em consultoria, dá aulas de finanças e é autor do livro <em>Educação Financeira: A Tríade
               do Capital</em>.
             </p>
-            <p className="placeholder-note">Texto provisório, a validar com o Cesar.</p>
           </div>
-          <Portrait caption="Foto oficial a definir" />
+          <Portrait caption="Cesar Hauer Doetzer" />
         </div>
       </Section>
       <Section tone="muted" eyebrow="Linha do tempo" title="Marcos">
@@ -35,13 +34,13 @@ export function Sobre() {
           items={[
             ['Engenharia', 'Formação e carreira em engenharia, com foco em análise quantitativa.'],
             ['2014: histórico de carteira', 'Início do registro sistemático de decisões e resultados.'],
-            ['2019: livro', 'Publicação de Educação Financeira: A Tríade do Capital (Editora CRV).'],
+            ['2019: livro', `Publicação de ${LIVRO.titulo} (${LIVRO.editora}).`],
             ['Registro na CVM', 'Consultoria de valores mobiliários e certificações CEA, CFG e CGA.'],
-            ['2026: segunda edição e curso online', 'Lançamento da edição revisada e da formação gravada.'],
+            ['2026: edição revisada e curso online', `Lançamento da edição revisada do livro em ${LIVRO.lancamento} e preparação da formação gravada.`],
           ]}
         />
       </Section>
-      <ContactBand title="Converse sobre o seu patrimônio" text="Sessões individuais por Microsoft Teams." to="/consultoria/agendar" label="Agendar consultoria" />
+      <ContactBand title="Converse sobre o seu patrimônio" text="Consultoria individual, por videoconferência, com recomendação para o seu caso." to="/consultoria" label="Conhecer a consultoria" />
     </>
   );
 }
@@ -65,7 +64,6 @@ export function Metodo() {
             { title: 'Longo prazo', text: 'O método foi desenhado para acumular patrimônio em décadas, não em semanas.' },
           ]}
         />
-        <p className="placeholder-note">Princípios ilustrativos, a substituir pelo texto oficial do método.</p>
       </Section>
       <Section tone="muted" eyebrow="Para quem é" title="Onde o método se aplica">
         <Cards
@@ -85,7 +83,7 @@ export function Metodo() {
 export function Livro() {
   return (
     <>
-      <PageHero eyebrow="Livro" title="Educação Financeira: A Tríade do Capital" lead="A base conceitual de todo o trabalho: como renda, poupança e investimento se combinam para formar patrimônio." />
+      <PageHero eyebrow="Livro" title={LIVRO.titulo} lead="A base conceitual de todo o trabalho: como renda, poupança e investimento se combinam para formar patrimônio." />
       <Section>
         <div className="split">
           <div className="book-cover" aria-hidden="true">
@@ -96,8 +94,8 @@ export function Livro() {
           <div className="prose">
             <h2>Sobre o livro</h2>
             <p>
-              Publicado pela Editora CRV em 2019 e relançado em edição revisada em 30/11/2026, o livro apresenta a
-              tríade que sustenta a construção de patrimônio e os fundamentos do Método PARSIFAL.
+              Publicado pela {LIVRO.editora} em {LIVRO.primeiraEdicao} e relançado em edição revisada em {LIVRO.lancamento}, o
+              livro apresenta a tríade que sustenta a construção de patrimônio e os fundamentos do Método PARSIFAL.
             </p>
             <h3>Para quem é</h3>
             <ul>
@@ -105,13 +103,29 @@ export function Livro() {
               <li>Quem já investe e quer entender o porquê das decisões.</li>
               <li>Professores e educadores financeiros.</li>
             </ul>
-            <a className="btn btn--primary" href="#" onClick={(e) => e.preventDefault()}>
-              Comprar no site da editora
-            </a>
-            <p className="placeholder-note">Link da editora a definir. O contrato não permite venda pelo site.</p>
+            {LIVRO.linkEditora ? (
+              <a className="btn btn--primary" href={LIVRO.linkEditora} target="_blank" rel="noopener noreferrer">
+                Comprar no site da editora
+              </a>
+            ) : (
+              <div className="em-breve" role="note">
+                <p className="em-breve__titulo">Link de compra em breve</p>
+                <p>
+                  O livro é vendido pela {LIVRO.editora}. O endereço de compra será publicado aqui assim que a editora o
+                  disponibilizar. Enquanto isso, quer ser avisado?{' '}
+                  <Link to="/lista-de-espera">Entre na lista de espera</Link>.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </Section>
+      <ContactBand
+        title="Quer levar o método do livro para a prática?"
+        text="O curso Formação de Investidores abre em breve. Entre na lista de espera e receba a data primeiro."
+        to="/lista-de-espera"
+        label="Entrar na lista de espera"
+      />
     </>
   );
 }
@@ -154,17 +168,17 @@ export function Cursos() {
       <Section>
         <div className="cards cards--3">
           <article className="card card--feature">
-            <p className="card__tag">Disponível</p>
+            <p className="card__tag">Em breve · lista de espera aberta</p>
             <h3 className="card__title">{COURSE.title}</h3>
             <p className="card__text">{COURSE.subtitle}</p>
             <p className="card__meta">
               {MODULES.length} módulos · {MODULES.reduce((n, m) => n + m.lessons.length, 0)} aulas
             </p>
-            <p className="card__price">
-              {brl(COURSE.launchPrice)} <small>lançamento</small>
-            </p>
             <Link to={`/cursos/${COURSE.slug}`} className="btn btn--accent btn--block">
-              Ver o curso
+              Ver o programa
+            </Link>
+            <Link to="/lista-de-espera" className="btn btn--ghost btn--block">
+              Entrar na lista de espera
             </Link>
           </article>
           <article className="card card--soon">
@@ -225,83 +239,53 @@ export function Post() {
 }
 
 export function Contato() {
+  const canais = [
+    CONTATO.email && (
+      <li key="email">
+        E-mail: <a href={`mailto:${CONTATO.email}`}>{CONTATO.email}</a>
+      </li>
+    ),
+    CONTATO.linkedin && (
+      <li key="linkedin">
+        <a href={CONTATO.linkedin} target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+      </li>
+    ),
+    CONTATO.instagram && (
+      <li key="instagram">
+        <a href={CONTATO.instagram} target="_blank" rel="noopener noreferrer">
+          Instagram
+        </a>
+      </li>
+    ),
+  ].filter(Boolean);
   return (
     <>
-      <PageHero eyebrow="Contato" title="Fale com o Cesar" lead="Palestras, parcerias, imprensa e dúvidas sobre cursos." />
+      <PageHero eyebrow="Contato" title="Fale com o Cesar" lead="Palestras, consultoria, imprensa e dúvidas sobre o livro e os cursos." />
       <Section>
-        <form className="form form--narrow" onSubmit={(e) => e.preventDefault()}>
-          <label>
-            Nome
-            <input required />
-          </label>
-          <label>
-            E-mail
-            <input type="email" required />
-          </label>
-          <label>
-            Assunto
-            <select>
-              <option>Palestra ou evento</option>
-              <option>Cursos</option>
-              <option>Consultoria</option>
-              <option>Imprensa</option>
-              <option>Outro</option>
-            </select>
-          </label>
-          <label>
-            Mensagem
-            <textarea rows={5} required />
-          </label>
-          <label className="check">
-            <input type="checkbox" required /> Concordo com o tratamento dos meus dados conforme a política de privacidade.
-          </label>
-          <button className="btn btn--primary">Enviar (simulado)</button>
-        </form>
-      </Section>
-    </>
-  );
-}
-
-const LEGAL: Record<string, [string, string[]]> = {
-  avisos: [
-    'Avisos regulatórios',
-    [
-      'O conteúdo de cursos, artigos, vídeos e palestras tem caráter exclusivamente educacional e não constitui oferta, solicitação ou recomendação de investimento.',
-      'A recomendação personalizada é prestada apenas no serviço de consultoria de valores mobiliários, nos termos da Resolução CVM 19/2021.',
-      'Rentabilidade passada não é garantia de rentabilidade futura. Investimentos envolvem riscos, inclusive de perda do capital.',
-    ],
-  ],
-  privacidade: [
-    'Política de privacidade (LGPD)',
-    [
-      'Coletamos apenas os dados necessários para a compra, o acesso ao curso e o agendamento das sessões.',
-      'Os dados de pagamento são tratados pelo processador de pagamentos e não ficam armazenados neste site.',
-      'Você pode pedir acesso, correção ou exclusão dos seus dados pelo formulário de contato.',
-    ],
-  ],
-  termos: [
-    'Termos de uso',
-    [
-      'O acesso ao curso é pessoal e intransferível, pelo prazo informado na página de venda.',
-      'Pedidos de reembolso em até 7 dias da compra, conforme o Código de Defesa do Consumidor.',
-      'Sessões de consultoria podem ser remarcadas com até 24 horas de antecedência.',
-    ],
-  ],
-};
-
-export function Legal() {
-  const { page = '' } = useParams();
-  const doc = LEGAL[page];
-  if (!doc) return <NotFound />;
-  return (
-    <>
-      <PageHero eyebrow="Legal" title={doc[0]} />
-      <Section>
-        <div className="prose prose--narrow">
-          {doc[1].map((t) => (
-            <p key={t}>{t}</p>
-          ))}
-          <p className="placeholder-note">Texto-base provisório, a revisar com o jurídico.</p>
+        <div className="split">
+          <div className="prose">
+            <h2>Canais</h2>
+            {canais.length ? (
+              <ul>{canais}</ul>
+            ) : (
+              <div className="em-breve" role="note">
+                <p className="em-breve__titulo">Canais de contato em breve</p>
+                <p>Os canais de atendimento serão publicados aqui nos próximos dias.</p>
+              </div>
+            )}
+            <p className="disclaimer">
+              Ao escrever, você concorda com o tratamento dos dados enviados conforme a{' '}
+              <Link to="/privacidade">política de privacidade</Link>. Resposta em até dois dias úteis.
+            </p>
+          </div>
+          <div className="prose">
+            <h2>Curso online</h2>
+            <p>
+              Para ser avisado da abertura do curso {COURSE.title}, use a <Link to="/lista-de-espera">lista de espera</Link>.
+            </p>
+          </div>
         </div>
       </Section>
     </>
