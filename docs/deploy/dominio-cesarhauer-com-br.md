@@ -73,13 +73,17 @@ O `/api/*` vai para a `chd-plataforma-api`, como no endereço provisório. A `vp
 
 1. Cesar registra o domínio e aponta o DNS (Parte 1).
 2. Conferir de fora, de qualquer máquina: `nslookup cesarhauer.com.br` e `nslookup www.cesarhauer.com.br` devem devolver `76.13.230.98`.
-3. Na máquina do Julio, publicar o site (o script detecta o DNS e acrescenta o bloco):
+3. Na máquina do Julio, publicar o site (o script detecta o DNS e acrescenta o bloco). A chave SSH é
+   resolvida dentro do `deploy/publicar-site.sh`, nunca na linha de comando (guarda de envios, ADR-0071):
 
    ```
-   ssh -i ~/.ssh/sig_deploy root@76.13.230.98 'bash ~/cesar-hauer-site/deploy/vps-deploy.sh'
+   bash ~/fesb/FSEB-SW/cesar-hauer-site/deploy/publicar-site.sh          # deploy
+   bash ~/fesb/FSEB-SW/cesar-hauer-site/deploy/publicar-site.sh status   # Caddyfile, certificados, containers
    ```
 
-4. Conferir: `curl -I https://cesarhauer.com.br/` deve dar 200 e `curl -I https://www.cesarhauer.com.br/` deve dar 308 para o apex.
+4. Conferir: `curl -I https://cesarhauer.com.br/` deve dar 200 e `curl -I https://www.cesarhauer.com.br/` deve redirecionar (301) para o apex.
+
+   Executado em 24/11/2026 (09h11, Brasília): DNS propagado, blocos acrescentados, certificado emitido, site no ar em https://cesarhauer.com.br.
 5. Gerar o QR code do evento apontando para `https://cesarhauer.com.br`.
 
 ### Pendências para dezembro (fora do congelamento de 28/11)
