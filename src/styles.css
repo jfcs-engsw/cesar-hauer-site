@@ -1511,3 +1511,27 @@ a {
     padding: 16px 20px 0;
   }
 }
+
+/* Vídeos do canal (player com a lista de uploads) */
+.videos {
+  display: grid;
+  gap: 20px;
+  max-width: 960px;
+}
+
+.video-frame {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 960px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

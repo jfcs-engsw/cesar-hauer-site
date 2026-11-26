@@ -33,3 +33,10 @@ export const CONTATO = {
   linkedin: '',
   instagram: '',
 };
+
+export const YOUTUBE = {
+  // Canal do CHD (pedido de 25/11/2026: vídeos no lugar dos artigos). Com os dois vazios, o menu não mostra
+  // "Vídeos" e a página avisa "em breve". canalId é o id "UC..." do canal; canalUrl, o endereço público.
+  canalUrl: '',
+  canalId: '',
+};

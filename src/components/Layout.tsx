@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { canalConfigurado } from '../pages/Videos';
 
 const NAV = [
   ['/sobre', 'Sobre'],
@@ -8,7 +9,7 @@ const NAV = [
   ['/palestras', 'Palestras'],
   ['/livro', 'Livro'],
   ['/consultoria', 'Consultoria'],
-  ['/blog', 'Artigos'],
+  ...(canalConfigurado ? [['/videos', 'Vídeos'] as const] : []),
 ] as const;
 
 export function Logo() {
@@ -75,7 +76,7 @@ function Footer() {
           <Link to="/metodo">Método PARSIFAL</Link>
           <Link to="/cursos">Cursos</Link>
           <Link to="/lista-de-espera">Lista de espera</Link>
-          <Link to="/blog">Artigos</Link>
+          {canalConfigurado && <Link to="/videos">Vídeos</Link>}
         </FooterCol>
         <FooterCol title="Serviços">
           <Link to="/consultoria">Consultoria</Link>

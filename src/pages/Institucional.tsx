@@ -1,7 +1,6 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BookCover, Cards, ContactBand, PageHero, Portrait, Section, Steps } from '../components/Blocks';
 import { COURSE, MODULES } from '../content/curso';
-import { POSTS } from '../content/posts';
 import { CONTATO, LIVRO } from '../content/site';
 
 export function Sobre() {
@@ -232,47 +231,6 @@ export function Cursos() {
             </Link>
           </article>
         </div>
-      </Section>
-    </>
-  );
-}
-
-export function Blog() {
-  return (
-    <>
-      <PageHero eyebrow="Artigos" title="Conteúdo para decidir melhor" lead="Textos curtos sobre fundamentos, carteira e comportamento do investidor." />
-      <Section>
-        <div className="cards cards--3">
-          {POSTS.map((p) => (
-            <Link key={p.slug} to={`/blog/${p.slug}`} className="card card--link">
-              <p className="card__tag">
-                {p.topic} · {p.date}
-              </p>
-              <h3 className="card__title">{p.title}</h3>
-              <p className="card__text">{p.excerpt}</p>
-            </Link>
-          ))}
-        </div>
-      </Section>
-    </>
-  );
-}
-
-export function Post() {
-  const { slug } = useParams();
-  const p = POSTS.find((x) => x.slug === slug);
-  if (!p) return <NotFound />;
-  return (
-    <>
-      <PageHero eyebrow={`${p.topic} · ${p.date}`} title={p.title} lead={p.excerpt} />
-      <Section>
-        <article className="prose prose--narrow">
-          {p.body.map((t) => (
-            <p key={t}>{t}</p>
-          ))}
-          <p className="disclaimer">Conteúdo educacional. Não constitui recomendação de investimento.</p>
-          <Link to="/blog">Voltar aos artigos</Link>
-        </article>
       </Section>
     </>
   );
