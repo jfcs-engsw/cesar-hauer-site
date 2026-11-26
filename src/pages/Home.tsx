@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Cards, ContactBand, Faq, Portrait, Section } from '../components/Blocks';
+import { BookCover, Cards, ContactBand, Faq, Portrait, Section } from '../components/Blocks';
 import { COURSE, MODULES } from '../content/curso';
 import { POSTS } from '../content/posts';
 import { LIVRO } from '../content/site';
@@ -43,15 +43,16 @@ export default function Home() {
 
       <Section eyebrow="Lançamento" title={LIVRO.titulo} lead={`Edição revisada, lançada em ${LIVRO.lancamento}.`}>
         <div className="split split--even">
-          <p className="prose-lead">
-            A base conceitual de todo o trabalho: como renda, poupança e investimento se combinam para formar patrimônio,
-            e os fundamentos do Método PARSIFAL.
-          </p>
-          <div>
+          <div className="book-teaser">
+            <p className="prose-lead">
+              A base conceitual de todo o trabalho: como renda, poupança e investimento se combinam para formar
+              patrimônio, e os fundamentos do Método PARSIFAL.
+            </p>
             <Link to="/livro" className="btn btn--primary">
               Ver o livro
             </Link>
           </div>
+          <BookCover />
         </div>
       </Section>
 

@@ -12,8 +12,10 @@ export const LIVRO = {
   primeiraEdicao: 2019,
   // Lançamento da edição revisada: evento de 30/11/2026.
   lancamento: '30 de novembro de 2026',
-  // Link de compra no site da editora. Vazio até o Cesar mandar: a página mostra o aviso "em breve".
-  linkEditora: '',
+  // Link de compra na loja da editora, enviado pelo Cesar em 25/11/2026.
+  linkEditora: 'https://loja.editoracrv.com.br/produtos/42421/',
+  // Capa enviada pelo Cesar em 25/11/2026 (public/livro).
+  capa: 'livro/capa-triade-do-capital.webp',
 };
 
 export const LISTA_ESPERA = {
