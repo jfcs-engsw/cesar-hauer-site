@@ -21,7 +21,7 @@ export default function Home() {
                 Conhecer o livro
               </Link>
               <Link to="/lista-de-espera" className="btn btn--ghost btn--lg">
-                Lista de espera do curso
+                Lista de espera dos cursos
               </Link>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function Home() {
           cols={4}
           items={[
             { tag: 'Ler', title: 'Livro', text: `${LIVRO.titulo}, a base conceitual do método.` },
-            { tag: 'Aprender', title: 'Curso online', text: 'Formação completa, do sistema financeiro à montagem de carteira, no seu ritmo. Em breve.' },
+            { tag: 'Aprender', title: 'Cursos', text: 'Turma presencial em Curitiba, curso online e curso básico, do sistema financeiro à montagem de carteira.' },
             { tag: 'Decidir', title: 'Consultoria', text: 'Sessões individuais por videoconferência para analisar o seu caso com recomendação personalizada.' },
             { tag: 'Inspirar', title: 'Palestras', text: 'Educação financeira para empresas, eventos e instituições de ensino.' },
           ]}
@@ -69,7 +69,7 @@ export default function Home() {
       </Section>
 
       <Section
-        eyebrow="Curso em breve"
+        eyebrow={`Curso ${COURSE.formato.toLowerCase()}`}
         title={COURSE.title}
         lead="Um curso raro no mercado: leva o aluno até as ferramentas profissionais de carteira e valuation, com exercícios e estudos de caso."
       >
@@ -79,14 +79,13 @@ export default function Home() {
               <li key={m.id}>
                 <span className="module-list__code">{m.code}</span>
                 <span>{m.title}</span>
-                <span className="module-list__count">{m.lessons.length} {m.lessons.length > 1 ? 'aulas' : 'aula'}</span>
               </li>
             ))}
           </ul>
           <aside className="offer">
-            <p className="offer__label">Inscrições em breve</p>
+            <p className="offer__label">Próxima turma em breve</p>
             <p className="offer__note">
-              Quem está na lista de espera recebe primeiro a data de abertura e as condições de lançamento.
+              Quem está na lista de espera recebe primeiro a data da turma em Curitiba e o aviso do curso online.
             </p>
             <Link to="/lista-de-espera" className="btn btn--accent btn--block">
               Entrar na lista de espera
@@ -127,8 +126,8 @@ export default function Home() {
       <Section tone="muted" eyebrow="Dúvidas" title="Perguntas frequentes">
         <Faq
           items={[
-            ['O curso serve para quem está começando?', 'Sim. Ele parte do sistema financeiro e da matemática financeira e avança até gestão de carteiras e valuation.'],
-            ['Quando as inscrições abrem?', 'Em breve. A data é anunciada primeiro para quem está na lista de espera.'],
+            ['Os cursos servem para quem está começando?', 'Sim. O curso básico é para quem quer começar; a Formação parte do sistema financeiro e avança até gestão de carteiras e valuation.'],
+            ['Quando abrem as inscrições?', 'Em breve. As datas são anunciadas primeiro para quem está na lista de espera.'],
             ['A consultoria é individual?', 'Sim. Cada sessão é individual, por videoconferência, após a análise do seu perfil.'],
             ['O conteúdo é recomendação de investimento?', 'Não. Cursos, artigos e palestras são educacionais. Recomendação personalizada só na consultoria, nos termos da CVM.'],
           ]}
@@ -136,8 +135,8 @@ export default function Home() {
       </Section>
 
       <ContactBand
-        title="Quer ser avisado da abertura do curso?"
-        text="Entre na lista de espera e receba a data, as condições de lançamento e conteúdo de preparação."
+        title="Quer ser avisado das próximas turmas?"
+        text="Entre na lista de espera e receba as datas dos cursos e das palestras antes de todo mundo."
         to="/lista-de-espera"
         label="Entrar na lista de espera"
       />

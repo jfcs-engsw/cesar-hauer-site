@@ -16,6 +16,9 @@ export const COURSE = {
   slug: 'formacao-de-investidores',
   title: 'Formação de Investidores',
   subtitle: 'Do sistema financeiro à montagem de carteira, com o rigor de quem faz consultoria todos os dias.',
+  // Pedido do CHD de 25/11/2026: a Formação de Investidores segue como curso presencial em Curitiba; o curso
+  // online novo sai do acervo gravado (plano DNN2-PT-01). O catálogo abaixo serve à turma presencial e ao portal.
+  formato: 'Presencial em Curitiba',
   launchPrice: 497,
   fullPrice: 997,
   installments: 12,

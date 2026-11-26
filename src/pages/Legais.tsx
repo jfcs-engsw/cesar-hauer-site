@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { PageHero, Section } from '../components/Blocks';
-import { LISTA_ESPERA } from '../content/site';
 
 // Páginas legais. Texto PROVISÓRIO, escrito pela equipe do site; as versões definitivas vêm da revisão
 // jurídica (Mike Ross) e substituem os parágrafos abaixo sem mudar as rotas: /privacidade, /termos, /avisos.
@@ -34,8 +33,8 @@ export function Privacidade() {
       <h2>Quais dados coletamos e para quê</h2>
       <ul>
         <li>
-          <strong>Lista de espera do curso {LISTA_ESPERA.curso}:</strong> nome e e-mail, para avisar sobre a abertura do
-          curso e enviar conteúdo relacionado. Base legal: consentimento, dado no formulário e confirmado pelo próprio
+          <strong>Lista de espera dos cursos e palestras:</strong> nome, e-mail e interesse, para avisar sobre as
+          próximas turmas, o curso online e as palestras e enviar conteúdo relacionado. Base legal: consentimento, dado no formulário e confirmado pelo próprio
           e-mail (confirmação em duas etapas). Você pode sair da lista a qualquer momento pelo link presente em cada
           mensagem.
         </li>

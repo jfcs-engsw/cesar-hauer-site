@@ -46,7 +46,7 @@ export function Layout() {
               </NavLink>
             ))}
             <Link to="/lista-de-espera" className="btn btn--accent btn--sm">
-              Lista de espera do curso
+              Lista de espera
             </Link>
           </nav>
         </div>
