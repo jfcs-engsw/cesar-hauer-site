@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { LIVRO, SITE } from '../content/site';
 
 // Entrada de seção: sobe 16 px uma única vez. Com redução de movimento, nada anima.
 export function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
@@ -155,5 +156,19 @@ export function Portrait({ caption }: { caption?: string }) {
       </div>
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
+  );
+}
+
+// Capa do livro enviada pelo CHD em 25/11/2026 (LIVRO.capa).
+export function BookCover() {
+  return (
+    <img
+      className="book-cover"
+      src={`${import.meta.env.BASE_URL}${LIVRO.capa}`}
+      alt={`Capa do livro ${LIVRO.titulo}, de ${SITE.nome}`}
+      width={640}
+      height={927}
+      loading="lazy"
+    />
   );
 }

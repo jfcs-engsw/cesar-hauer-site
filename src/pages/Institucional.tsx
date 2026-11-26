@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { Cards, ContactBand, PageHero, Portrait, Section, Steps } from '../components/Blocks';
+import { BookCover, Cards, ContactBand, PageHero, Portrait, Section, Steps } from '../components/Blocks';
 import { COURSE, MODULES } from '../content/curso';
 import { POSTS } from '../content/posts';
 import { CONTATO, LIVRO } from '../content/site';
@@ -18,12 +18,13 @@ export function Sobre() {
             <h2>Trajetória</h2>
             <p>
               Cesar Hauer Doetzer é engenheiro, consultor de valores mobiliários registrado na Comissão de Valores
-              Mobiliários (CVM) e certificado pela ANBIMA nas certificações CEA, CFG e CGA.
+              Mobiliários (CVM) e possui as certificações CEA, CFG e CGA da ANBIMA.
             </p>
             <p>
-              Desde 2014 acompanha e documenta a própria carteira, base do Método PARSIFAL. Atende pessoas e famílias de
-              alto patrimônio em consultoria, dá aulas de finanças e é autor do livro <em>Educação Financeira: A Tríade
-              do Capital</em>.
+              Atua no mercado financeiro desde 2014, período em que desenvolveu e aperfeiçoou uma metodologia própria de
+              análise e gestão de investimentos, que deu origem ao Método PARSIFAL. Atualmente, presta consultoria de
+              investimentos para pessoas e famílias de alto patrimônio, é professor de finanças e autor do livro{' '}
+              <em>Educação Financeira: A Tríade do Capital</em>.
             </p>
           </div>
           <Portrait caption="Cesar Hauer Doetzer" />
@@ -33,7 +34,7 @@ export function Sobre() {
         <Steps
           items={[
             ['Engenharia', 'Formação e carreira em engenharia, com foco em análise quantitativa.'],
-            ['2014: histórico de carteira', 'Início do registro sistemático de decisões e resultados.'],
+            ['2012: início das operações no mercado financeiro', 'Primeiras operações, base da metodologia que deu origem ao Método PARSIFAL.'],
             ['2019: livro', `Publicação de ${LIVRO.titulo} (${LIVRO.editora}).`],
             ['Registro na CVM', 'Consultoria de valores mobiliários e certificações CEA, CFG e CGA.'],
             ['2026: edição revisada e curso online', `Lançamento da edição revisada do livro em ${LIVRO.lancamento} e preparação da formação gravada.`],
@@ -55,13 +56,20 @@ export function Metodo() {
       />
       <Section eyebrow="Princípios" title="Como o método funciona">
         <Cards
+          cols={3}
           items={[
-            { title: 'Seleção com critério', text: 'Ativos entram na carteira por critérios fundamentalistas definidos antes, não por notícia.' },
-            { title: 'Preço teto', text: 'Cada compra tem um preço máximo calculado. Acima dele, espera-se.' },
-            { title: 'Peso e risco', text: 'O tamanho de cada posição segue o risco do ativo e o objetivo do investidor.' },
-            { title: 'Rebalanceamento', text: 'A carteira volta aos pesos-alvo em datas e gatilhos definidos.' },
-            { title: 'Registro', text: 'Toda decisão é registrada com a razão, para ser revisada depois.' },
-            { title: 'Longo prazo', text: 'O método foi desenhado para acumular patrimônio em décadas, não em semanas.' },
+            {
+              title: 'Diversificação sem fronteiras',
+              text: 'A carteira busca oportunidades em diferentes mercados, moedas e classes de ativos, reduzindo a dependência de um único país ou cenário econômico.',
+            },
+            {
+              title: 'Ativos que se equilibram',
+              text: 'A combinação prioriza ativos com comportamentos distintos e correlações baixas ou negativas, buscando maior equilíbrio e resiliência nos diferentes ciclos de mercado.',
+            },
+            {
+              title: 'Alocação com método',
+              text: 'Cada classe de ativo possui um percentual de alocação definido. Isso traz disciplina às decisões e evita que movimentos de curto prazo desviem a carteira da estratégia.',
+            },
           ]}
         />
       </Section>
@@ -86,11 +94,7 @@ export function Livro() {
       <PageHero eyebrow="Livro" title={LIVRO.titulo} lead="A base conceitual de todo o trabalho: como renda, poupança e investimento se combinam para formar patrimônio." />
       <Section>
         <div className="split">
-          <div className="book-cover" aria-hidden="true">
-            <span className="book-cover__title">Educação Financeira</span>
-            <span className="book-cover__sub">A Tríade do Capital</span>
-            <span className="book-cover__author">Cesar Hauer Doetzer</span>
-          </div>
+          <BookCover />
           <div className="prose">
             <h2>Sobre o livro</h2>
             <p>
@@ -99,9 +103,9 @@ export function Livro() {
             </p>
             <h3>Para quem é</h3>
             <ul>
-              <li>Quem quer organizar as finanças antes de investir.</li>
-              <li>Quem já investe e quer entender o porquê das decisões.</li>
-              <li>Professores e educadores financeiros.</li>
+              <li>Investidores iniciantes.</li>
+              <li>Quem já investe, mas quer melhorar a estratégia e os conhecimentos sobre os produtos.</li>
+              <li>Pessoas que estão pensando em como podem começar a investir.</li>
             </ul>
             {LIVRO.linkEditora ? (
               <a className="btn btn--primary" href={LIVRO.linkEditora} target="_blank" rel="noopener noreferrer">

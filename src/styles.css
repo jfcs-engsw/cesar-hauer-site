@@ -987,37 +987,18 @@ a {
 
 /* Livro */
 .book-cover {
-  aspect-ratio: 2 / 3;
+  display: block;
   width: min(100%, 320px);
+  height: auto;
   justify-self: center;
-  border-radius: 4px 12px 12px 4px;
-  background: linear-gradient(135deg, var(--petrol-800), var(--ink));
+  border-radius: 4px 10px 10px 4px;
   box-shadow:
     inset 6px 0 0 rgb(0 0 0 / 25%),
     0 20px 40px rgb(11 31 30 / 25%);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 32px;
-  gap: 8px;
 }
 
-.book-cover__title {
-  font: 600 1.75rem/1.15 var(--serif);
-}
-
-.book-cover__sub {
-  font: italic 400 1.25rem var(--serif);
-  color: var(--gold);
-}
-
-.book-cover__author {
-  margin-top: auto;
-  font-size: 0.8125rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #cfe0de;
+.book-teaser .btn {
+  margin-top: 24px;
 }
 
 /* Formulários */
