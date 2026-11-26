@@ -7,6 +7,7 @@ import { Layout } from './components/Layout';
 import Home from './pages/Home';
 import { Contato, Cursos, Livro, Metodo, NotFound, Palestras, Sobre } from './pages/Institucional';
 import Videos from './pages/Videos';
+import Materiais from './pages/Materiais';
 import { Avisos, Privacidade, Termos } from './pages/Legais';
 import { CursoEmBreve } from './pages/Curso';
 import ListaDeEspera from './pages/ListaDeEspera';
@@ -43,6 +44,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="portal/curso/:cursoId/aula/:aulaId" element={<PortalAula />} />
           <Route path="consultoria" element={<Consultoria />} />
           <Route path="videos" element={<Videos />} />
+          <Route path="materiais" element={<Materiais />} />
           {/* A seção de artigos saiu em 25/11/2026 (o CHD não tem artigos publicados): endereços antigos vão para Vídeos. */}
           <Route path="blog/*" element={<Navigate to="/videos" replace />} />
           <Route path="contato" element={<Contato />} />
