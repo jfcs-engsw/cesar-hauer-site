@@ -147,12 +147,19 @@ export function ContactBand({ title, text, to, label }: { title: string; text: s
   );
 }
 
-// Foto provisória (perfil público do Instagram, 150 px) até chegar a foto oficial do CHD.
+// Foto do acervo do CHD (05-Fotos, IMG_2208), recortada em 4:5 e com luz e cor corrigidas, sem alterar o rosto.
+// Alternativas em 02-Insumos Novos Cesar/Candidatas Foto Site; trocar só o arquivo em public/fotos.
 export function Portrait({ caption }: { caption?: string }) {
   return (
     <figure className="portrait">
       <div className="portrait__frame">
-        <img className="portrait__photo" src={`${import.meta.env.BASE_URL}fotos/chd-provisoria.png`} alt="Cesar Hauer Doetzer" />
+        <img
+          className="portrait__photo"
+          src={`${import.meta.env.BASE_URL}fotos/chd-oficial.webp`}
+          alt="Cesar Hauer Doetzer"
+          width={900}
+          height={1125}
+        />
       </div>
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
