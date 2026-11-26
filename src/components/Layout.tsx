@@ -75,6 +75,7 @@ function Footer() {
           <Link to="/livro">Livro</Link>
           <Link to="/metodo">Método PARSIFAL</Link>
           <Link to="/cursos">Cursos</Link>
+          <Link to="/materiais">Materiais</Link>
           <Link to="/lista-de-espera">Lista de espera</Link>
           {canalConfigurado && <Link to="/videos">Vídeos</Link>}
         </FooterCol>
