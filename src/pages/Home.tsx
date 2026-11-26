@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BookCover, Cards, ContactBand, Faq, Portrait, Section } from '../components/Blocks';
 import { COURSE, MODULES } from '../content/curso';
-import { POSTS } from '../content/posts';
+import { PlayerCanal, canalConfigurado } from './Videos';
 import { LIVRO } from '../content/site';
 
 export default function Home() {
@@ -111,17 +111,16 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section eyebrow="Artigos" title="Conteúdo recente">
-        <div className="cards cards--3">
-          {POSTS.map((p) => (
-            <Link key={p.slug} to={`/blog/${p.slug}`} className="card card--link">
-              <p className="card__tag">{p.topic}</p>
-              <h3 className="card__title">{p.title}</h3>
-              <p className="card__text">{p.excerpt}</p>
+      {canalConfigurado && (
+        <Section eyebrow="Vídeos" title="Conteúdo recente">
+          <PlayerCanal />
+          <p>
+            <Link to="/videos" className="btn btn--ghost">
+              Ver os vídeos
             </Link>
-          ))}
-        </div>
-      </Section>
+          </p>
+        </Section>
+      )}
 
       <Section tone="muted" eyebrow="Dúvidas" title="Perguntas frequentes">
         <Faq
@@ -129,7 +128,7 @@ export default function Home() {
             ['Os cursos servem para quem está começando?', 'Sim. O curso básico é para quem quer começar; a Formação parte do sistema financeiro e avança até gestão de carteiras e valuation.'],
             ['Quando abrem as inscrições?', 'Em breve. As datas são anunciadas primeiro para quem está na lista de espera.'],
             ['A consultoria é individual?', 'Sim. Cada sessão é individual, por videoconferência, após a análise do seu perfil.'],
-            ['O conteúdo é recomendação de investimento?', 'Não. Cursos, artigos e palestras são educacionais. Recomendação personalizada só na consultoria, nos termos da CVM.'],
+            ['O conteúdo é recomendação de investimento?', 'Não. Cursos, vídeos e palestras são educacionais. Recomendação personalizada só na consultoria, nos termos da CVM.'],
           ]}
         />
       </Section>
