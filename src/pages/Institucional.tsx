@@ -126,7 +126,7 @@ export function Livro() {
       </Section>
       <ContactBand
         title="Quer levar o método do livro para a prática?"
-        text="O curso Formação de Investidores abre em breve. Entre na lista de espera e receba a data primeiro."
+        text="Turma presencial em Curitiba, curso online e curso básico. Entre na lista de espera e receba as datas primeiro."
         to="/lista-de-espera"
         label="Entrar na lista de espera"
       />
@@ -138,17 +138,26 @@ export function Palestras() {
   return (
     <>
       <PageHero eyebrow="Palestras e eventos" title="Educação financeira que muda decisões" lead="Palestras, workshops e aulas abertas para empresas, eventos e instituições de ensino." />
-      <Section eyebrow="Temas" title="Palestras mais pedidas">
+      <Section
+        eyebrow="Temas"
+        title="Palestras em preparação"
+        lead="Três temas para começar. Entre na lista de espera para saber das próximas datas ou peça uma proposta para o seu evento."
+      >
         <Cards
           items={[
-            { tag: '60 min', title: 'A Tríade do Capital', text: 'Renda, poupança e investimento: como os três se combinam ao longo da vida.' },
-            { tag: '90 min', title: 'Investir com método', text: 'Por que regras explícitas vencem o palpite, com exemplos reais de carteira.' },
-            { tag: 'Workshop 3 h', title: 'Montando a primeira carteira', text: 'Atividade prática com planilha, do perfil ao rebalanceamento.' },
-            { tag: '60 min', title: 'Finanças comportamentais', text: 'Os vieses que mais custam dinheiro e como evitá-los.' },
-            { tag: 'Empresas', title: 'Educação financeira para colaboradores', text: 'Programa para RH, com palestra e material de apoio.' },
-            { tag: 'Ensino', title: 'Aula aberta para universidades', text: 'Matemática financeira aplicada para cursos de engenharia e gestão.' },
+            { tag: 'Em preparação', title: 'A Tríade do Capital', text: 'Renda, poupança e investimento: como os três se combinam ao longo da vida.' },
+            { tag: 'Em preparação', title: 'Investir com método', text: 'Por que regras explícitas vencem o palpite, com os princípios do Método PARSIFAL.' },
+            { tag: 'Em preparação · empresas', title: 'Educação financeira para colaboradores', text: 'Palestra para empresas e RH, com material de apoio.' },
           ]}
         />
+        <div className="hero__actions">
+          <Link to="/lista-de-espera" className="btn btn--accent">
+            Entrar na lista de espera
+          </Link>
+          <Link to="/contato" className="btn btn--ghost">
+            Pedir proposta
+          </Link>
+        </div>
       </Section>
       <Section tone="muted" eyebrow="Como contratar" title="Do pedido ao evento">
         <Steps
@@ -168,32 +177,42 @@ export function Palestras() {
 export function Cursos() {
   return (
     <>
-      <PageHero eyebrow="Cursos" title="Aprenda no seu ritmo, com quem pratica" lead="Cursos gravados, com acesso pela área do aluno, exercícios e material de apoio." />
+      <PageHero
+        eyebrow="Cursos"
+        title="Aprenda com quem pratica"
+        lead="Turma presencial em Curitiba, curso online e curso básico, com o mesmo método. Entre na lista de espera e receba as datas primeiro."
+      />
       <Section>
         <div className="cards cards--3">
           <article className="card card--feature">
-            <p className="card__tag">Em breve · lista de espera aberta</p>
+            <p className="card__tag">{COURSE.formato} · lista de espera aberta</p>
             <h3 className="card__title">{COURSE.title}</h3>
             <p className="card__text">{COURSE.subtitle}</p>
-            <p className="card__meta">
-              {MODULES.length} módulos · {MODULES.reduce((n, m) => n + m.lessons.length, 0)} aulas
-            </p>
+            <p className="card__meta">{MODULES.length} módulos</p>
             <Link to={`/cursos/${COURSE.slug}`} className="btn btn--accent btn--block">
               Ver o programa
             </Link>
             <Link to="/lista-de-espera" className="btn btn--ghost btn--block">
+              Quero participar da próxima turma
+            </Link>
+          </article>
+          <article className="card">
+            <p className="card__tag">Em produção · lista de espera aberta</p>
+            <h3 className="card__title">Curso online</h3>
+            <p className="card__text">Curso gravado, no seu ritmo, pela área do aluno, com as aulas mais recentes do Cesar.</p>
+            <Link to="/lista-de-espera" className="btn btn--ghost btn--block">
               Entrar na lista de espera
             </Link>
           </article>
-          <article className="card card--soon">
-            <p className="card__tag">Em breve</p>
-            <h3 className="card__title">Do zero ao primeiro investimento</h3>
-            <p className="card__text">Organizar as contas, abrir a corretora e fazer a primeira aplicação com segurança.</p>
-          </article>
-          <article className="card card--soon">
-            <p className="card__tag">Em breve</p>
-            <h3 className="card__title">Método PARSIFAL na prática</h3>
-            <p className="card__text">Montagem e rebalanceamento de carteira aplicando o método passo a passo.</p>
+          <article className="card">
+            <p className="card__tag">Em breve · lista de espera aberta</p>
+            <h3 className="card__title">Curso básico de investimentos</h3>
+            <p className="card__text">
+              Cerca de 4 horas para quem quer começar: organizar as finanças, entender os produtos e dar o primeiro passo.
+            </p>
+            <Link to="/lista-de-espera" className="btn btn--ghost btn--block">
+              Entrar na lista de espera
+            </Link>
           </article>
         </div>
       </Section>
@@ -285,9 +304,10 @@ export function Contato() {
             </p>
           </div>
           <div className="prose">
-            <h2>Curso online</h2>
+            <h2>Cursos e palestras</h2>
             <p>
-              Para ser avisado da abertura do curso {COURSE.title}, use a <Link to="/lista-de-espera">lista de espera</Link>.
+              Para ser avisado das próximas turmas, do curso online e das palestras, use a{' '}
+              <Link to="/lista-de-espera">lista de espera</Link>.
             </p>
           </div>
         </div>

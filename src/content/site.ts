@@ -19,7 +19,6 @@ export const LIVRO = {
 };
 
 export const LISTA_ESPERA = {
-  curso: 'Formação de Investidores',
   // Formulário hospedado da Brevo (lista "Tríade do Capital: lista de espera"), publicado em 22/11/2026.
   // Endereço público do formulário, sem chave (docs/deploy/lista-de-espera-brevo.md).
   // Confirmação em duas etapas pendente de verificar o telefone na conta da Brevo; até lá, sem e-mail de confirmação.

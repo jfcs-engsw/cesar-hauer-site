@@ -4,19 +4,17 @@ import { COURSE, MODULES } from '../content/curso';
 import { NotFound } from './Institucional';
 import { FormularioListaDeEspera } from './ListaDeEspera';
 
-const TOTAL = MODULES.reduce((n, m) => n + m.lessons.length, 0);
-
-// Página do curso antes da abertura: programa real e lista de espera. Preço, checkout e matrícula entram
-// com a abertura das inscrições, depois da decisão de dezembro.
+// Formação de Investidores como turma presencial em Curitiba (pedido do CHD de 25/11/2026): programa real e
+// inscrição pela lista de espera. Preço e matrícula entram com a abertura da turma.
 export function CursoEmBreve() {
   const { slug } = useParams();
   if (slug !== COURSE.slug) return <NotFound />;
   return (
     <>
-      <PageHero eyebrow="Curso online · Em breve" title={COURSE.title} lead={COURSE.subtitle}>
+      <PageHero eyebrow={`${COURSE.formato} · Próxima turma`} title={COURSE.title} lead={COURSE.subtitle}>
         <div className="hero__actions">
           <Link to="/lista-de-espera" className="btn btn--accent btn--lg">
-            Entrar na lista de espera
+            Quero participar da próxima turma
           </Link>
           <button
             className="btn btn--ghost btn--lg"
@@ -31,9 +29,9 @@ export function CursoEmBreve() {
         <Stats
           items={[
             { value: String(MODULES.length), label: 'módulos' },
-            { value: String(TOTAL), label: 'aulas gravadas' },
-            { value: 'Online', label: 'no seu ritmo, pela área do aluno' },
-            { value: 'Em breve', label: 'abertura das inscrições' },
+            { value: 'Presencial', label: 'em Curitiba, com o Cesar em sala' },
+            { value: 'Exercícios', label: 'e estudos de caso em aula' },
+            { value: 'Em breve', label: 'data da próxima turma' },
           ]}
         />
       </Section>
@@ -51,7 +49,7 @@ export function CursoEmBreve() {
         />
       </Section>
 
-      <Section id="programa" eyebrow="Programa" title="Módulos e aulas">
+      <Section id="programa" eyebrow="Programa" title="Módulos e temas">
         <div className="syllabus">
           {MODULES.map((m, i) => (
             <details key={m.id} className="syllabus__mod" open={i === 0}>
@@ -73,11 +71,11 @@ export function CursoEmBreve() {
         </div>
       </Section>
 
-      <Section tone="dark" eyebrow="Lista de espera" title="Receba a data de abertura antes de todo mundo">
+      <Section tone="dark" eyebrow="Lista de espera" title="Receba a data da próxima turma antes de todo mundo">
         <div className="split">
           <p className="prose-lead">
-            As inscrições abrem em breve. Quem está na lista recebe primeiro a data, as condições de lançamento e conteúdo
-            de preparação.
+            A próxima turma presencial em Curitiba será anunciada primeiro para quem está na lista, com a data, o local e
+            as condições de inscrição.
           </p>
           <FormularioListaDeEspera compacto />
         </div>
@@ -87,9 +85,9 @@ export function CursoEmBreve() {
         <Faq
           items={[
             ['Preciso saber matemática?', 'Não além do ensino médio. O módulo 2 constrói a base com exercícios resolvidos.'],
-            ['Quando as inscrições abrem?', 'A data será anunciada primeiro para quem está na lista de espera.'],
+            ['Quando é a próxima turma?', 'A data será anunciada primeiro para quem está na lista de espera.'],
             ['O curso recomenda ativos?', 'Não. Os exemplos são didáticos. Recomendação personalizada só na consultoria.'],
-            ['Como vou assistir às aulas?', 'Pela área do aluno deste site, com login por e-mail, no computador ou no celular.'],
+            ['Moro fora de Curitiba. Há opção online?', 'Sim: o curso online está em produção. Entre na lista de espera para ser avisado.'],
           ]}
         />
       </Section>

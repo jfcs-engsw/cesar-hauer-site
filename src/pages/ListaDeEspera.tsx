@@ -21,7 +21,7 @@ export function FormularioListaDeEspera({ compacto = false }: { compacto?: boole
     <div className={`waitlist ${compacto ? 'waitlist--compacto' : ''}`}>
       <iframe
         className="waitlist__frame"
-        title={`Lista de espera do curso ${LISTA_ESPERA.curso}`}
+        title="Lista de espera dos cursos e palestras"
         src={LISTA_ESPERA.formUrl}
         height={LISTA_ESPERA.formAltura}
         loading="lazy"
@@ -45,17 +45,17 @@ export default function ListaDeEspera() {
     <>
       <PageHero
         eyebrow="Lista de espera"
-        title={`Seja avisado da abertura do curso ${LISTA_ESPERA.curso}`}
-        lead="Quem está na lista recebe primeiro a data de abertura, as condições de lançamento e conteúdo preparatório. Sem compromisso de compra."
+        title="Seja avisado das próximas turmas e palestras"
+        lead="Turma presencial em Curitiba, curso online, curso básico e palestras: quem está na lista recebe as datas primeiro. Sem compromisso de compra."
       />
       <Section>
         <div className="split">
           <div className="prose">
             <h2>O que você recebe</h2>
             <ul>
-              <li>A data de abertura das inscrições antes da divulgação geral.</li>
+              <li>As datas das turmas e das palestras antes da divulgação geral.</li>
               <li>As condições de lançamento, reservadas a quem está na lista.</li>
-              <li>Conteúdo de preparação: artigos e aulas abertas sobre o Método PARSIFAL.</li>
+              <li>Conteúdo de preparação sobre o Método PARSIFAL.</li>
             </ul>
             <p className="disclaimer">
               Conteúdo educacional. Não constitui recomendação de investimento. Você pode sair da lista a qualquer
