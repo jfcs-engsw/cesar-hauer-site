@@ -1388,3 +1388,126 @@ a {
 [data-tone='dark'] .waitlist--aviso a {
   color: var(--gold);
 }
+
+/* Página do método: tema inspirado em "The Temptation of Sir Percival" (Arthur Hacker, 1894), pedido do CHD
+   de 25/11/2026. Vale só dentro de .tema-percival; o resto do site segue a marca CHD. */
+.tema-percival {
+  --ink: #2b2116;
+  --text: #33291c;
+  --text-2: #5c4f3b;
+  --paper: #fbf7ee;
+  --muted: #efe6d3;
+  --border: #d8c9a8;
+  --gold: #a9874f;
+  --gold-text: #8a6a35;
+  --percival-musgo: #25261d;
+  --percival-creme: #ece4cf;
+  --serif: Georgia, 'Times New Roman', serif;
+  background: var(--paper);
+  color: var(--text);
+}
+
+.tema-percival .section__title,
+.tema-percival .page-hero__title,
+.tema-percival .card__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.tema-percival .card {
+  background: #fffdf7;
+  box-shadow: 0 1px 0 rgb(43 33 22 / 6%);
+}
+
+.tema-percival .section--dark {
+  background: var(--percival-musgo);
+  box-shadow: inset 4px 0 0 var(--gold);
+}
+
+.tema-percival .section--dark .card {
+  background: rgb(255 255 255 / 4%);
+  border-color: rgb(236 228 207 / 18%);
+}
+
+.tema-percival .section--dark .card__title {
+  color: var(--percival-creme);
+}
+
+.tema-percival .section--dark .card__text,
+.tema-percival .section--dark .disclaimer {
+  color: #c9bfa6;
+}
+
+.percival-hero {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: min(82vh, 720px);
+  padding: 120px 0 64px;
+  overflow: hidden;
+  background: #17110b;
+  isolation: isolate;
+}
+
+.percival-hero__quadro {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 30%;
+}
+
+.percival-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgb(23 17 11 / 92%) 0%, rgb(23 17 11 / 72%) 38%, rgb(23 17 11 / 10%) 72%),
+    linear-gradient(0deg, rgb(23 17 11 / 70%) 0%, rgb(23 17 11 / 0%) 45%);
+}
+
+.percival-hero__texto {
+  width: 100%;
+}
+
+.percival-hero .eyebrow {
+  color: var(--gold);
+}
+
+.percival-hero .page-hero__title {
+  color: var(--percival-creme);
+  max-width: 18ch;
+}
+
+.percival-hero .page-hero__lead {
+  color: #d6ccb3;
+  max-width: 52ch;
+}
+
+.percival-hero__credito {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgb(236 228 207 / 70%);
+}
+
+@media (max-width: 700px) {
+  .percival-hero__quadro {
+    object-position: 68% 20%;
+  }
+
+  .percival-hero::before {
+    background: linear-gradient(0deg, rgb(23 17 11 / 94%) 0%, rgb(23 17 11 / 70%) 55%, rgb(23 17 11 / 25%) 100%);
+  }
+
+  .percival-hero__credito {
+    position: static;
+    padding: 16px 20px 0;
+  }
+}

@@ -48,12 +48,29 @@ export function Sobre() {
 
 export function Metodo() {
   return (
-    <>
-      <PageHero
-        eyebrow="Método PARSIFAL"
-        title="Regras explícitas para decisões de investimento"
-        lead="Um método proprietário que organiza seleção, dimensionamento e rebalanceamento, para que cada decisão possa ser explicada e revisada."
-      />
+    <div className="tema-percival">
+      <section className="percival-hero" aria-labelledby="percival-titulo">
+        <img
+          className="percival-hero__quadro"
+          src={`${import.meta.env.BASE_URL}metodo/percival-hacker-1894.webp`}
+          alt="Pintura de Arthur Hacker: o cavaleiro Percival, de armadura, segura o cálice enquanto uma mulher o observa, num bosque de outono."
+          width={2000}
+          height={1125}
+        />
+        <div className="container percival-hero__texto">
+          <p className="eyebrow">Método PARSIFAL</p>
+          <h1 id="percival-titulo" className="page-hero__title">
+            Regras explícitas para decisões de investimento
+          </h1>
+          <p className="page-hero__lead">
+            Um método proprietário que organiza seleção, dimensionamento e rebalanceamento, para que cada decisão possa
+            ser explicada e revisada.
+          </p>
+        </div>
+        <p className="percival-hero__credito">
+          Arthur Hacker, <em>The Temptation of Sir Percival</em>, 1894. Leeds Art Gallery. Domínio público.
+        </p>
+      </section>
       <Section eyebrow="Princípios" title="Como o método funciona">
         <Cards
           cols={3}
@@ -73,7 +90,7 @@ export function Metodo() {
           ]}
         />
       </Section>
-      <Section tone="muted" eyebrow="Para quem é" title="Onde o método se aplica">
+      <Section tone="dark" eyebrow="Para quem é" title="Onde o método se aplica">
         <Cards
           cols={3}
           items={[
@@ -84,7 +101,7 @@ export function Metodo() {
         />
         <p className="disclaimer">Resultados históricos do estudo apresentado no livro não são garantia de resultados futuros.</p>
       </Section>
-    </>
+    </div>
   );
 }
 
