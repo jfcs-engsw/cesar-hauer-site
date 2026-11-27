@@ -79,9 +79,15 @@ export type Configuracoes = {
 const enviar = <T>(metodo: 'POST' | 'PUT', caminho: string, corpo: unknown) =>
   req<T>(caminho, { method: metodo, body: JSON.stringify(corpo) });
 
+// Entrar com Google: navegação de página inteira (a API redireciona ao Google e volta ao portal com o cookie).
+export const URL_GOOGLE = `${BASE}/auth/google`;
+
 export const api = {
-  pedirLink: (email: string) =>
-    req<{ mensagem: string }>('/auth/link', { method: 'POST', body: JSON.stringify({ email }) }),
+  estadoAuth: () => req<{ google: boolean }>('/auth/estado'),
+  entrar: (email: string, senha: string) => enviar<Eu>('POST', '/auth/entrar', { email, senha }),
+  pedirCodigo: (email: string) => enviar<{ mensagem: string }>('POST', '/auth/codigo', { email }),
+  confirmarCodigo: (email: string, codigo: string, senha: string) =>
+    enviar<Eu>('POST', '/auth/codigo/confirmar', { email, codigo, senha }),
   sair: () => req<void>('/auth/sair', { method: 'POST' }),
   eu: () => req<Eu>('/eu'),
   cursos: () => req<CursoResumo[]>('/cursos'),

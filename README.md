@@ -13,7 +13,7 @@ Endereço definitivo: `https://cesarhauer.com.br` (domínio do Cesar, no Registr
 | Cursos e página do curso Formação de Investidores (`/#/cursos/formacao-de-investidores`) | "Em breve": programa real (59 aulas em 13 módulos) e lista de espera, sem preço nem matrícula |
 | Lista de espera (`/#/lista-de-espera`) | Formulário hospedado da Brevo embutido (`LISTA_ESPERA.formUrl`); confirmação em duas etapas e consentimento LGPD na Brevo. Roteiro em `docs/deploy/lista-de-espera-brevo.md` |
 | Política de privacidade, termos de uso e avisos regulatórios (`/#/privacidade`, `/#/termos`, `/#/avisos`) | Texto provisório marcado, aguardando a revisão jurídica. `/#/legal/...` redireciona |
-| Área do aluno (`/#/portal`): login por link mágico, meus cursos, módulos com progresso, aula com player, configurações | Real, servida pela API `chd-plataforma-api` em `/api` (FSEB-SW/dnn2-consultoria-investimentos#17); sem a API, mostra "em implantação". Link só no rodapé enquanto o curso não abre |
+| Área do aluno (`/#/portal`): login por e-mail e senha ou Entrar com Google (o botão aparece quando a API tem o cliente OAuth), primeiro acesso e recuperação por código de 6 dígitos, meus cursos, módulos com progresso, aula com player, configurações | Real, servida pela API `chd-plataforma-api` em `/api` (FSEB-SW/dnn2-consultoria-investimentos#17); sem a API, mostra "em implantação". Link só no rodapé enquanto o curso não abre |
 | Gestão | Saiu do site: é o app próprio `FSEB-SW/chd-painel`. `/#/gestao` leva ao painel quando o build tem `VITE_PAINEL_URL` |
 
 Saíram em 22/11/2026 (issue #12): checkout e agenda simulados, prévia da área do aluno e formulário de contato simulado. Nenhum link do site leva a eles.

@@ -88,6 +88,6 @@ O `/api/*` vai para a `chd-plataforma-api`, como no endereço provisório. A `vp
 
 ### Pendências para dezembro (fora do congelamento de 28/11)
 
-- API: `SITE_URL` no `.env` da VPS ainda é o endereço provisório; o link mágico da área do aluno volta para lá. Troca-se com `SITE_HOST=cesarhauer.com.br` na publicação da API (ajuste no `publicar-chd.sh`, que hoje não repassa a variável) quando a área do aluno for aberta.
+- API: `SITE_URL` no `.env` da VPS ainda é o endereço provisório; o retorno ao portal e o do Entrar com Google (`SITE_URL/api/auth/google/retorno`) voltam para lá. Troca-se com `SITE_HOST=cesarhauer.com.br` na publicação da API (ajuste no `publicar-chd.sh`, que hoje não repassa a variável) quando a área do aluno for aberta.
 - E-mail: SPF, DKIM e DMARC do domínio para a Brevo e a caixa Hostinger, conforme `deploy/README.md` da `chd-plataforma-api`. Até lá, a lista de espera dispara pela conta Brevo do WAIS, com remetente dela.
 - Retirar o bloco `sslip.io` do Caddyfile quando o QR code e todos os links já usarem o domínio.
