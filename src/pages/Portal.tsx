@@ -1,8 +1,9 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
-import { api, ApiErro, type CursoDetalhe, type CursoResumo, type Eu, type Player } from '../lib/api';
+import { api, ApiErro, URL_GOOGLE, type CursoDetalhe, type CursoResumo, type Eu, type Player } from '../lib/api';
 
-// Área do aluno real: login por link mágico, cursos com matrícula ativa, aulas com player e progresso.
+// Área do aluno real: login por e-mail e senha ou pelo Google, primeiro acesso e recuperação por código de
+// 6 dígitos, cursos com matrícula ativa, aulas com player e progresso.
 // O acesso é decidido pela API (cookie HttpOnly); o front só mostra o que ela libera.
 
 const INDISPONIVEL = (
@@ -29,37 +30,144 @@ export function Progress({ done, total }: { done: number; total: number }) {
   );
 }
 
-function Entrar() {
-  const [params] = useSearchParams();
-  const [email, setEmail] = useState('');
-  const [enviado, setEnviado] = useState('');
-  const [erro, setErro] = useState(params.get('erro') === 'link' ? 'O link expirou ou já foi usado. Peça um novo abaixo.' : '');
-  const [ocupado, setOcupado] = useState(false);
+const ERROS_DA_URL: Record<string, string> = {
+  google: 'Não foi possível entrar com o Google. Tente de novo ou use e-mail e senha.',
+  'google-sem-cadastro':
+    'Este e-mail do Google não tem cadastro de aluno. Entre com o e-mail usado na compra ou fale conosco.',
+  link: 'O acesso agora é por senha. Use "Primeiro acesso ou esqueci a senha" para criar a sua.',
+};
 
-  const enviar = async (e: FormEvent) => {
+function mensagemDeErro(err: unknown, padrao: string): string {
+  if (err instanceof ApiErro && err.status !== 422) return err.message;
+  return padrao;
+}
+
+// Três passos: entrar com senha; pedir o código de 6 dígitos (primeiro acesso ou esqueci a senha); confirmar o
+// código com a senha nova, que já entra. `?primeiro=1&email=...` (e-mail de boas-vindas) abre no segundo passo.
+function Entrar({ aoEntrar }: { aoEntrar: () => void }) {
+  const [params] = useSearchParams();
+  const [passo, setPasso] = useState<'senha' | 'codigo' | 'confirmar'>(params.get('primeiro') ? 'codigo' : 'senha');
+  const [email, setEmail] = useState(params.get('email') ?? '');
+  const [senha, setSenha] = useState('');
+  const [codigo, setCodigo] = useState('');
+  const [erro, setErro] = useState(ERROS_DA_URL[params.get('erro') ?? ''] ?? '');
+  const [ocupado, setOcupado] = useState(false);
+  const [google, setGoogle] = useState(false);
+
+  useEffect(() => {
+    api
+      .estadoAuth()
+      .then((e) => setGoogle(e.google))
+      .catch(() => setGoogle(false));
+  }, []);
+
+  const ir = (p: typeof passo) => {
+    setErro('');
+    setSenha('');
+    if (p !== 'confirmar') setCodigo('');
+    setPasso(p);
+  };
+
+  const executar = (acao: () => Promise<void>, padrao: string) => async (e: FormEvent) => {
     e.preventDefault();
     setOcupado(true);
     setErro('');
     try {
-      await api.pedirLink(email.trim());
-      setEnviado(email.trim());
+      await acao();
     } catch (err) {
-      setErro(err instanceof ApiErro && err.status !== 422 ? err.message : 'Confira o e-mail digitado.');
+      setErro(mensagemDeErro(err, padrao));
     } finally {
       setOcupado(false);
     }
   };
 
-  if (enviado)
+  const entrar = executar(async () => {
+    await api.entrar(email.trim(), senha);
+    aoEntrar();
+  }, 'Confira o e-mail e a senha.');
+
+  const pedirCodigo = executar(async () => {
+    await api.pedirCodigo(email.trim());
+    ir('confirmar');
+  }, 'Confira o e-mail digitado.');
+
+  const confirmar = executar(async () => {
+    await api.confirmarCodigo(email.trim(), codigo.trim(), senha);
+    aoEntrar();
+  }, 'Confira o código (6 dígitos) e a senha nova (pelo menos 8 caracteres).');
+
+  const campoEmail = (
+    <label>
+      E-mail
+      <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+    </label>
+  );
+  const aviso = erro && (
+    <p className="portal-erro" role="alert">
+      {erro}
+    </p>
+  );
+
+  if (passo === 'codigo')
     return (
       <article className="card">
-        <h2 className="card__title">Confira seu e-mail</h2>
+        <h2 className="card__title">Primeiro acesso ou esqueci a senha</h2>
         <p className="card__text">
-          Se <strong>{enviado}</strong> estiver cadastrado, enviamos um link de acesso. Ele vale por 15 minutos e só pode
-          ser usado uma vez.
+          Informe o e-mail usado na compra. Enviaremos um código de 6 dígitos para você criar a sua senha.
         </p>
-        <button className="btn btn--ghost btn--block" onClick={() => setEnviado('')}>
-          Usar outro e-mail
+        <form className="form" onSubmit={pedirCodigo}>
+          {campoEmail}
+          {aviso}
+          <button className="btn btn--accent btn--block" disabled={ocupado}>
+            {ocupado ? 'Enviando...' : 'Receber o código'}
+          </button>
+        </form>
+        <button className="link" onClick={() => ir('senha')}>
+          Já tenho senha
+        </button>
+      </article>
+    );
+
+  if (passo === 'confirmar')
+    return (
+      <article className="card">
+        <h2 className="card__title">Criar a senha</h2>
+        <p className="card__text">
+          Se <strong>{email.trim()}</strong> estiver cadastrado, enviamos um código de 6 dígitos. Ele vale por 15
+          minutos.
+        </p>
+        <form className="form" onSubmit={confirmar}>
+          <label>
+            Código
+            <input
+              required
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              pattern="[0-9]{6}"
+              maxLength={6}
+              value={codigo}
+              onChange={(e) => setCodigo(e.target.value.replace(/[^0-9]/g, ''))}
+            />
+          </label>
+          <label>
+            Senha nova (pelo menos 8 caracteres)
+            <input
+              type="password"
+              required
+              minLength={8}
+              maxLength={128}
+              autoComplete="new-password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+            />
+          </label>
+          {aviso}
+          <button className="btn btn--accent btn--block" disabled={ocupado}>
+            {ocupado ? 'Salvando...' : 'Salvar a senha e entrar'}
+          </button>
+        </form>
+        <button className="link" onClick={() => ir('codigo')}>
+          Não recebi o código
         </button>
       </article>
     );
@@ -67,21 +175,31 @@ function Entrar() {
   return (
     <article className="card">
       <h2 className="card__title">Entrar</h2>
-      <p className="card__text">Informe o e-mail usado na inscrição. Enviaremos um link de acesso, sem senha.</p>
-      <form className="form" onSubmit={enviar}>
+      <form className="form" onSubmit={entrar}>
+        {campoEmail}
         <label>
-          E-mail
-          <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          Senha
+          <input
+            type="password"
+            required
+            autoComplete="current-password"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
         </label>
-        {erro && (
-          <p className="portal-erro" role="alert">
-            {erro}
-          </p>
-        )}
+        {aviso}
         <button className="btn btn--accent btn--block" disabled={ocupado}>
-          {ocupado ? 'Enviando...' : 'Receber link de acesso'}
+          {ocupado ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
+      {google && (
+        <a href={URL_GOOGLE} className="btn btn--ghost btn--block">
+          Entrar com Google
+        </a>
+      )}
+      <button className="link" onClick={() => ir('codigo')}>
+        Primeiro acesso ou esqueci a senha
+      </button>
     </article>
   );
 }
@@ -111,17 +229,19 @@ export function PortalHome() {
   const [eu, setEu] = useState<Eu | null>(null);
   const [cursos, setCursos] = useState<CursoResumo[]>([]);
 
+  const carregar = async () => {
+    try {
+      const u = await api.eu();
+      setCursos(await api.cursos());
+      setEu(u);
+      setEstado('dentro');
+    } catch (e) {
+      setEstado(e instanceof ApiErro && e.status === 401 ? 'entrar' : 'fora');
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const u = await api.eu();
-        setCursos(await api.cursos());
-        setEu(u);
-        setEstado('dentro');
-      } catch (e) {
-        setEstado(e instanceof ApiErro && e.status === 401 ? 'entrar' : 'fora');
-      }
-    })();
+    carregar();
   }, []);
 
   const sair = async () => {
@@ -151,7 +271,7 @@ export function PortalHome() {
         {estado === 'fora' && <div className="cards cards--2">{INDISPONIVEL}</div>}
         {estado === 'entrar' && (
           <div className="cards cards--2">
-            <Entrar />
+            <Entrar aoEntrar={carregar} />
           </div>
         )}
         {estado === 'dentro' && (
