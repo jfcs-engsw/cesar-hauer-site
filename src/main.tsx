@@ -10,6 +10,7 @@ import Videos from './pages/Videos';
 import Materiais from './pages/Materiais';
 import { Avisos, Privacidade, Termos } from './pages/Legais';
 import { CursoEmBreve } from './pages/Curso';
+import { Comprar } from './pages/Comprar';
 import ListaDeEspera from './pages/ListaDeEspera';
 import { PortalAula, PortalCurso, PortalHome } from './pages/Portal';
 import { Consultoria } from './pages/Consultoria';
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="palestras" element={<Palestras />} />
           <Route path="cursos" element={<Cursos />} />
           <Route path="cursos/:slug" element={<CursoEmBreve />} />
+          <Route path="comprar/:produto" element={<Comprar />} />
           <Route path="lista-de-espera" element={<ListaDeEspera />} />
           <Route path="portal" element={<PortalHome />} />
           <Route path="portal/configuracoes" element={<Configuracoes />} />

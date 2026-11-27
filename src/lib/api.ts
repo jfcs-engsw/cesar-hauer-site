@@ -79,11 +79,23 @@ export type Configuracoes = {
 const enviar = <T>(metodo: 'POST' | 'PUT', caminho: string, corpo: unknown) =>
   req<T>(caminho, { method: metodo, body: JSON.stringify(corpo) });
 
+export type ProdutoAVenda = { codigo: string; nome: string; preco_centavos: number; curso_slug: string };
+export type NovoPedido = {
+  produto: string;
+  nome: string;
+  email: string;
+  cpf_cnpj: string;
+  forma: 'PIX' | 'CREDIT_CARD';
+  aceite: boolean;
+};
+
 // Entrar com Google: navegação de página inteira (a API redireciona ao Google e volta ao portal com o cookie).
 export const URL_GOOGLE = `${BASE}/auth/google`;
 
 export const api = {
   estadoAuth: () => req<{ google: boolean }>('/auth/estado'),
+  produtosAVenda: () => req<ProdutoAVenda[]>('/checkout/produtos'),
+  abrirPedido: (p: NovoPedido) => enviar<{ pedido: string; url: string }>('POST', '/checkout', p),
   entrar: (email: string, senha: string) => enviar<Eu>('POST', '/auth/entrar', { email, senha }),
   pedirCodigo: (email: string) => enviar<{ mensagem: string }>('POST', '/auth/codigo', { email }),
   confirmarCodigo: (email: string, codigo: string, senha: string) =>
